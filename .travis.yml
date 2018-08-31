@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+ - 2.4.3
+ - jruby
+
+ notifications:
+   slack:
+     on_success: always
