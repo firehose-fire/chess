@@ -24,7 +24,14 @@ group :development, :test do
   # testing framework for Rails
   gem 'rspec-rails', '~> 3.7'
   #
-  gem "factory_bot_rails", "~> 4.0"
+  gem 'factory_bot_rails', '~> 4.0'
+
+  # Figaro adds protected keys
+  gem 'figaro'
+
+  gem 'omniauth'
+  #authentication for facebook users
+  gem 'omniauth-facebook'
 end
 
 group :development do
