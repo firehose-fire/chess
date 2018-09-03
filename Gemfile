@@ -32,6 +32,8 @@ group :development, :test do
   gem 'omniauth'
   #authentication for facebook users
   gem 'omniauth-facebook'
+  #authentication for google users
+  gem 'omniauth-google-oauth2'
 end
 
 group :development do
