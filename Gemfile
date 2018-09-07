@@ -19,13 +19,21 @@ gem 'jbuilder', '~> 2.5'
 # Official manual http://docs.rubocop.org/en/latest/
 gem 'rubocop', '~> 0.58.2', require: false
 
-
 group :development, :test do
   gem 'byebug', platform: :mri
   # testing framework for Rails
   gem 'rspec-rails', '~> 3.7'
   #
-  gem "factory_bot_rails", "~> 4.0"
+  gem 'factory_bot_rails', '~> 4.0'
+
+  # Figaro adds protected keys
+  gem 'figaro'
+
+  gem 'omniauth'
+  #authentication for facebook users
+  gem 'omniauth-facebook'
+  #authentication for google users
+  gem 'omniauth-google-oauth2'
 end
 
 group :development do
