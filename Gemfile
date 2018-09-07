@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.5'
 # Official manual http://docs.rubocop.org/en/latest/
 gem 'rubocop', '~> 0.58.2', require: false
 
+
 group :development, :test do
   gem 'byebug', platform: :mri
   # testing framework for Rails
@@ -43,4 +44,5 @@ gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '~> 1.1', '>= 1.1.1'
 end
+
 gem 'simple_form'
