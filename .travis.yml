@@ -5,9 +5,13 @@ rvm:
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate --trace
   - bundle exec rspec
+  
+before_install:
+  - gem update bundler
 
 services:
   - postgresql
+  
 
 notifications:
   email: false
