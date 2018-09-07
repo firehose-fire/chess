@@ -23,4 +23,3 @@ Things you may want to cover:
 
 * ...
 
-I am changing the readme
