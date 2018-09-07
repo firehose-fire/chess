@@ -270,7 +270,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
-  pg (>= 0.18, < 2.0)
+(>= 0.18, < 2.0)
   popper_js (~> 1.14, >= 1.14.3)
   puma (~> 3.0)
   rails (~> 5.0.7)
