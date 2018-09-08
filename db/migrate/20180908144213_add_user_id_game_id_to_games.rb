@@ -1,5 +1,5 @@
 class AddUserIdGameIdToGames < ActiveRecord::Migration[5.0]
-  def 
+  def change
     add_column :games, :game_id, :integer
     add_column :games, :user_id_white, :integer
     add_column :games, :user_id_black, :integer
