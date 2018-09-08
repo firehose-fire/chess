@@ -5,7 +5,7 @@
 table {
   margin: auto;
   border: collapse;
-  background: #999;
+  background: white;
   border: 5px solid #333;
   border-collapse: collapse;
 }
@@ -16,5 +16,5 @@ td {
 }
 
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
-  background: white;
+  background: black;
 }
