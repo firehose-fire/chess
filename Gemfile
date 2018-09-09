@@ -33,6 +33,15 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Figaro adds protected keys
+  gem 'figaro'
+
+  gem 'omniauth'
+  #authentication for facebook users
+  gem 'omniauth-facebook'
+  #authentication for google users
+  gem 'omniauth-google-oauth2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
