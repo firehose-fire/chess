@@ -24,6 +24,7 @@ Devise.setup do |config|
   config.omniauth  :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {}
   
   require 'omniauth-facebook'
+  require 'GoogleOauth2'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
