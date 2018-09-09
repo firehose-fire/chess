@@ -1,5 +1,5 @@
 class Piece < ApplicationRecord
-  belongs_to :games
+  belongs_to :game
   belongs_to :user
 
 end
