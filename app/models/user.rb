@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  
+  has_many :games
 
 
 
@@ -13,4 +15,5 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
 end
