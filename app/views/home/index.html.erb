@@ -1,0 +1,9 @@
+
+  <div class="games_available col-10">
+    <h3>Available Games</h3>
+    <ul id="games_available" >
+      <% Game.available.each do |g| %>
+        <li>Game: <%= g.id %> </li>
+      <% end %>
+    </ul> 
+  </div>
