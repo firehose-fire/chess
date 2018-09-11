@@ -3,7 +3,7 @@
     <h3>Available Games</h3>
     <ul id="games_available" >
       <% Game.available.each do |g| %>
-        <li>Game: <%= g.id %> </li>
+        <li>Game: <%= link_to g.id, game_path(game) %> </li>
       <% end %>
     </ul> 
   </div>
