@@ -2,8 +2,8 @@
   <div class="games_available col-10">
     <h3>Available Games</h3>
     <ul id="games_available" >
-      <% Game.available.each do |g| %>
-        <li>Game: <%= link_to g.id, game_path(game) %> </li>
+      <% Game.available.each do |game| %>
+        <li>Game: <%= game.name %><%= link_to 'Join', games_path(:id), method: :put, class: 'btn' %> </li>
       <% end %>
     </ul> 
   </div>
