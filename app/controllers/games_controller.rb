@@ -13,11 +13,12 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Games.find(params[:id])
+    @game = Game.find(params[:id])
 
-    if @game.update(:user_white_id => current_user.id)
-      redirect_to @game
-    end
+    @game.update(user_white_id: current_user.id)
+
   end
+
+
   
 end
