@@ -10,7 +10,7 @@ RSpec.describe GamesController, type: :controller do
       current_user = FactoryBot.create(:user)
       # sign_in user
 
-      game = FactoryBot.create(:game, user_black_id: user.id)
+      game = FactoryBot.create(:game, user_black_id: user.id, id: 5)
 
       patch :update, params: { user_white_id: current_user.id}
 
