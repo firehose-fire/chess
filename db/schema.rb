@@ -10,31 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180908144239) do
+ActiveRecord::Schema.define(version: 20180909163522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bishops", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "game_id"
-    t.integer  "user_id_white"
-    t.integer  "user_id_black"
+    t.integer  "user_white_id"
+    t.integer  "user_black_id"
     t.string   "user_winner"
-    t.index ["game_id"], name: "index_games_on_game_id", using: :btree
+  end
+
+  create_table "kings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "knights", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pawns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.integer  "piece_id"
     t.integer  "coordinate_x"
     t.integer  "coordinate_y"
-    t.string   "piece_type"
     t.string   "piece_color"
     t.boolean  "captured"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "game_id"
+  end
+
+  create_table "queens", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,10 +74,10 @@ ActiveRecord::Schema.define(version: 20180908144239) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-    t.index ["user_id"], name: "index_users_on_user_id", using: :btree
   end
 
 end

@@ -19,6 +19,15 @@ gem 'jbuilder', '~> 2.5'
 # Official manual http://docs.rubocop.org/en/latest/
 gem 'rubocop', '~> 0.58.2', require: false
 
+# Figaro adds protected keys
+gem 'figaro'
+
+gem 'omniauth'
+#authentication for facebook users
+gem 'omniauth-facebook'
+#authentication for google users
+gem 'omniauth-google-oauth2'
+
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -33,6 +42,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

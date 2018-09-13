@@ -20,6 +20,12 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], callback_url: "http://localhost:3000/users/auth/facebook/callback"
+  config.omniauth  :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {}
+  
+  require 'omniauth-facebook'
+  require 'omniauth-google-oauth2'
+
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
