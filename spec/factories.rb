@@ -27,7 +27,7 @@ FactoryBot.define do
   
   factory :game do
     name "test"
-    game_id 1
+    id 2
     user_black_id 1
 
   end
