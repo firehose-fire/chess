@@ -1,6 +1,7 @@
 class King < Piece
-
-  def valid_move
+  @king = Piece.find(:type 'king')
+  
+  def valid_move  
 
   end
 end

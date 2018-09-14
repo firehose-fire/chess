@@ -1,4 +1,7 @@
 FactoryBot.define do
+  factory :piece do
+
+  end
   factory :king do
     
   end
@@ -29,6 +32,7 @@ FactoryBot.define do
     name "test"
     id 2
     user_black_id 1
-
   end
+
+
 end
