@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe King, type: :model do
   before(:all) do 
     game = FactoryBot.build(:game, id: 1)
-    @king = FactoryBot.build(:king, coordinate_x: 3, coordinate_y: 0, game_id: game.id)      
+    user = FactoryBot.build(:user, id: 1)
+    @king = FactoryBot.build(:king, coordinate_x: 3, coordinate_y: 0, game_id: game.id, user_id: 1)      
 
   end
 
