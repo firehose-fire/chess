@@ -31,4 +31,8 @@ FactoryBot.define do
     user_black_id 1
 
   end
+
+  factory :piece do
+
+  end
 end
