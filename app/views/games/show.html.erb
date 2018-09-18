@@ -12,7 +12,7 @@
             <tr>
               <% 8.times do |row| %>
 
-                <td data-column= "<%= column %>" data-row= "<%= row %>"> <!-- this gives a col and row to table cells-->
+                <td  id ="<%= column %><%= row %>" data-column= "<%= column %>" data-row= "<%= row %>"> <!-- this gives a col and row to table cells-->
 
                   <%= link_to 'dummy', piece_path(1) %>
 
