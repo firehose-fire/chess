@@ -25,18 +25,18 @@ RSpec.describe Piece, type: :model do
                                 coordinate_y: 0,
                                 piece_color: 'black', user_id: 1)
 
-      expect(piece.move_to!(3,1)).to eq(located_piece.captured = true)
+      expect(piece.move_to!(3,2)).to eq(located_piece.captured = true)
 
     end
 
-    # it "should move and update the position" do
-    #   piece = FactoryBot.create(:piece,
-    #                             coordinate_x: 3,
-    #                             coordinate_y: 0,
-    #                             piece_color: 'black', user_id: 1)
-    #   piece.move_to!(6,3)
-    #   expect([piece.coordinate_x,piece.coordinate_y]).to eq([6,3])
-    #
-    # end
+    it "should move and update the position" do
+      piece = FactoryBot.create(:piece,
+                                coordinate_x: 3,
+                                coordinate_y: 0,
+                                piece_color: 'black', user_id: 1)
+      piece.move_to!(6,3)
+      expect([piece.coordinate_x,piece.coordinate_y]).to eq([6,3])
+
+    end
   end
 end
