@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  it 'populate_the_game' do
+  it 'populate_game' do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
 
