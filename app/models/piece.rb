@@ -1,4 +1,5 @@
 class Piece < ApplicationRecord
+
   belongs_to :game , optional: true
   belongs_to :user , optional: true
 
@@ -21,6 +22,7 @@ class Piece < ApplicationRecord
   def move_to!(new_x, new_y)
     captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
   end
+
 
 
 
