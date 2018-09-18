@@ -35,7 +35,7 @@ FactoryBot.define do
   end
 
   factory :piece do
-
+    type {"King"}
 
   end
 
