@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :piece do
+    type {"King"}
+
+  end
   
   factory :king do
     
@@ -34,10 +38,7 @@ FactoryBot.define do
 
   end
 
-  factory :piece do
-    type {"King"}
-
-  end
+  
 
 
 end
