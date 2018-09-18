@@ -8,12 +8,6 @@ RSpec.describe King, type: :model do
 
   end
 
-  it "is invalid without an x coordinate" do
-    king = FactoryBot.build(:king, coordinate_x: nil)
-
-    expect(king).to_not be_valid
-  end
-
   describe "valid_move?" do
     it "should return true if the king piece move is valid" do
     expect(@king.valid_move?(4,1)).to eq(true)
