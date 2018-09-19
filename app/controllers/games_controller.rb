@@ -13,6 +13,9 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find(params[:id])
+    @selected_piece = nil
+
   end
 
   def update
@@ -23,6 +26,9 @@ class GamesController < ApplicationController
     end
   end
 
+  def piece
+    @piece ||= Piece.find_by_id!(piece[:id])  
+  end
 
   
 end
