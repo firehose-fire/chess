@@ -7,7 +7,8 @@ class PiecesController < ApplicationController
   end
 
   def update
-    @piece.update_attributes(:coordinate_x, :coordinate_y)
+    @selected_piece.update_attributes(:coordinate_x, :coordinate_y)
+    redirect_to game_path
   end
 
 

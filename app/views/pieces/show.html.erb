@@ -4,14 +4,14 @@
       <% (0..7).each do |column| %>
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %>" id="<%= column %><%= row %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
+        <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
           
           
           
         <%= link_to_piece get_piece_at_click(@game.pieces, row, column) %>
 
+        <%= link_to_square piece_path(@selected_piece), :method => 'patch' %>
 
-        
 
         </td>
 
