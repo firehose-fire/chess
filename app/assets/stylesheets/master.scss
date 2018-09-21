@@ -1,1 +1,57 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed%27');
+
+body {
+  width: 100%;
+  margin: 0%;
+}
+
+
+// Container-fluid section
+.container-img {
+  background-image: linear-gradient(rgba(20,20,20, .5),
+          rgba(20,20,20, .5)),
+  url( "container-img.jpg");
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  position: relative;
+
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 23rem;
+  padding-top: 15px;
+}
+
+.nav-link {
+  color: white !important;
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+  transition: all .3s
+}
+
+
+.nav-link:hover {
+  opacity: .7;
+}
+
+.text {
+  position: absolute;
+  top: 30%;
+  left: 23%;
+  color: white;
+}
+
+.text h1 {
+  font-size: 120px;
+  letter-spacing: -2px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px #000;
+}
+// -------------------------------
