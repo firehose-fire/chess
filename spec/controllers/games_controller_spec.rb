@@ -10,7 +10,7 @@ RSpec.describe GamesController, type: :controller do
       current_user = FactoryBot.build(:user)
       allow(controller).to receive(:authenticate_user!).and_return(true)
       allow(controller).to receive(:current_user).and_return(current_user)
-      game = FactoryBot.build(:game, user_black_id: user.id)
+      game = FactoryBot.build(:game, user_black_id: user.id, id: 2)
       # patch :update, params: { user_white_id: current_user.id}
       puts "game id is #{game.id}"
       puts "current_user id is #{current_user.id}"
@@ -18,9 +18,6 @@ RSpec.describe GamesController, type: :controller do
       game.reload
       
       expect(game.user_white_id).to eq current_user.id
-
-
-
     end
 
   end

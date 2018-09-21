@@ -41,7 +41,7 @@ FactoryBot.define do
     sequence :id do |i|
       "#{i}"
     end
-    user_black_id {1}
+    user_black_id {2}
 
   end
 
