@@ -5,11 +5,13 @@
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
         <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
-          <%= form_for @selected_piece, method: :patch do |f| %>
+
+        <%= form_for("/piece", method: "patch") do |f| %>
             <%= f.hidden_field :coordinate_x, value: row %>
             <%= f.hidden_field :coordinate_y, value: column %>
-            <%= f.submit 'MoveHere' %>
-          <% end %>
+            <%= f.submit 'Move' %>
+        <% end %>
+
         </td>
 
       <% end  %>
