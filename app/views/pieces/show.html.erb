@@ -5,14 +5,11 @@
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
         <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
-          
-          
-          
-        <%= link_to_piece get_piece_at_click(@game.pieces, row, column) %>
-
-        <%= link_to_square piece_path(@selected_piece), :method => 'patch' %>
-
-
+          <%= form_for @selected_piece, method: :patch do |f| %>
+            <%= f.hidden_field :coordinate_x, value: row %>
+            <%= f.hidden_field :coordinate_y, value: column %>
+            <%= f.submit 'MoveHere' %>
+          <% end %>
         </td>
 
       <% end  %>
