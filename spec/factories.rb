@@ -24,7 +24,7 @@ FactoryBot.define do
   end
   factory :user do
     sequence :email do |n|
-      "dummyEmail#{n}@gmail.com"
+      "dummiEmail#{n}@gmail.com"
     end
     password {"secretPassword"}
     password_confirmation {"secretPassword"}
@@ -33,7 +33,7 @@ FactoryBot.define do
   factory :game do
 
     name {"test"}
-    id {2}
+    id {3}
     user_black_id {1}
 
   end
