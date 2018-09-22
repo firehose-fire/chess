@@ -46,7 +46,7 @@ RSpec.describe Game, type: :model do
 
       piece.move_to!(4,3)
 
-      expect(game.is_check?(user_black)).to eq(true)
+      expect(game.is_check?(user_black.id)).to eq(true)
 
 
     end
