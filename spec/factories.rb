@@ -24,7 +24,7 @@ FactoryBot.define do
   end
   factory :user do
     sequence :email do |n|
-      "dummyEmail#{n}@gmail.com"
+      "dummiEmail#{n}@gmail.com"
     end
 
     password {"secretPassword"}
@@ -38,10 +38,10 @@ FactoryBot.define do
   factory :game do
 
     name {"test"}
-    sequence :id do |i|
-      "#{i}"
-    end
-    
+
+    id {3}
+    user_black_id {1}
+
 
   end
 
