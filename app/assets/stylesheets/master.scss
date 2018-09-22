@@ -55,3 +55,31 @@ body {
   text-shadow: 1px 1px 1px #000;
 }
 // -------------------------------
+
+// Section Games
+
+.games_available {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.game-table {
+  border: none;
+  width: 70%;
+}
+
+.table {
+  width: 50%;
+  margin-top: 50px;
+}
+
+.table tbody + tbody {
+  border-top: 1px solid #dee2e6;
+}
+
+.table th, .table td {
+  border-top: 1px solid #dee2e6;
+}
+.table thead th {
+  border-bottom: 1px solid #dee2e6;
+}
