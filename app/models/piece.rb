@@ -32,10 +32,10 @@ class Piece < ApplicationRecord
   # Define method using x and y target coordinates to see if move is vertical
   def check_vertical(x_target, y_target)
     #bottom to top
-      if coordinate_y < y_target
+    if coordinate_y < y_target
       (coordinate_y+1..y_target-1).each do |y|
         return true if is_occupied?(x_target, y)
-      end
+    end
         return false
     end
     #top to bottom
@@ -50,9 +50,38 @@ class Piece < ApplicationRecord
 
   # Define method using x and y target coordinates to see if move is diaganol
   def check_diaganol(x_target, y_target)
-    
+    x = coordinate_x
+    y = coordinate_y
 
+    #top to bottom and left to right
+    while x < x_target do 
+      x = x + 1 
+      y = y -1
+      return true if is_occupied?(x, y)
+    end
 
+    #top to bottom and right to left
+    while x > x_target do 
+      x = x - 1 
+      y = y - 1
+      return true if is_occupied?(x, y)
+    end
+
+    #bottom to top and right to left
+    while x > x_target do 
+      x = x - 1 
+      y = y + 1
+      return true if is_occupied?(x, y)
+    end
+
+    #bottom to top and left to right
+    while y < y_target do 
+      x = x + 1 
+      y = y + 1
+      return true if is_occupied?(x, y)
+    end
+
+    return false
   end
 
 
@@ -63,7 +92,7 @@ class Piece < ApplicationRecord
 
     # is the path valid
    if x_target > 7 || x_target < 0 || y_target > 7 || y_target < 0
-    return false 
+    raise 'Outside of bounds of game'
    end
 
       
@@ -80,27 +109,11 @@ class Piece < ApplicationRecord
     # is the path diaganol
     elsif x_position_change == y_position_change
       check_diaganol(x_target, y_target) 
+    else
+      raise "Error Invalid move"
     end
 
   end
 
-
-def captured?(new_x, new_y)
-    target_move = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
-
-    if defined?(target_move.user_id)
-      if(target_move.user_id == self.user_id)
-        raise RuntimeError
-      else
-        target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
-      end
-    end
-
-  end
-
-
-  def move_to!(new_x, new_y)
-    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
-  end
 
 end
