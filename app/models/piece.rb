@@ -9,6 +9,28 @@ class Piece < ApplicationRecord
     
   end
 
+
+  def is_diagonal_move?(x_target, y_target)
+    if (self.coordinate_x - x_target).abs == (self.coordinate_y - y_target).abs
+      return true
+    end
+    false
+  end
+
+  def is_vertical_move?(x_target, y_target)
+    if self.coordinate_x == x_target && self.coordinate_y != y_target
+      return true
+    end
+    false
+  end
+
+  def is_horizontal_move?(x_target, y_target)
+    if self.coordinate_x != x_target && self.coordinate_y == y_target
+      return true
+    end
+    false
+  end
+
 # Define method using x and y target coordinates to see if move is horizontal
   def check_horizontal(x_target, y_target)
     #left to right
