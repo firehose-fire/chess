@@ -24,11 +24,17 @@ RSpec.describe Bishop, type: :model do
       expect(@bishop.valid_move?(2,2)).to eq(true)
     end
      
-    # it "should return false if the rook piece move is not valid (horizontal or vertical)" do
-    #   expect(@bishop.valid_move?(1,1)).to eq(false)
-    #   expect(@bishop.valid_move?(0,8)).to eq(false)
-    #   expect(@bishop.valid_move?(8,0)).to eq(false)
-    # end
+    it "should return false if the rook piece move is not valid" do
+      expect(@bishop.valid_move?(2,3)).to eq(false)
+      expect(@bishop.valid_move?(4,5)).to eq(false)
+      expect(@bishop.valid_move?(8,0)).to eq(false)
+    end
+
+    it "should return false if rook move is valid but obstructed" do
+      obstructing_piece = FactoryBot.build(:piece, coordinate_x: 4, coordinate_y: 4)
+      expect(@bishop.valid_move?(5,5)).to eq(false)
+
+    end
      
    end
 end

@@ -92,27 +92,25 @@ class Piece < ApplicationRecord
   def check_diagonal(x_target, y_target)
     x = coordinate_x
     y = coordinate_y
-
-    
-    
-    if x == y
-
-      #bottom to top and left to right
-      while x < x_target do 
-        x = x + 1 
-        y = y + 1
-        return is_occupied?(x, y)
+        
+    if x_target == y_target 
+      if x > x_target
+        #top to bottom and right to left
+        while x > x_target do 
+          x = x - 1 
+          y = y - 1
+          return is_occupied?(x, y)
+        end
+      else
+        #bottom to top and left to right
+        while x < x_target do 
+          x = x + 1 
+          y = y + 1
+          return is_occupied?(x, y)
+        end  
       end
 
-      #top to bottom and right to left
-      while x > x_target do 
-        x = x - 1 
-        y = y - 1
-        return is_occupied?(x, y)
-      end
-
-    elsif x < y
-          
+    elsif x_target > x          
       #top to bottom and left to right
       while x < x_target do 
         x = x + 1 
@@ -121,7 +119,7 @@ class Piece < ApplicationRecord
       end
 
     
-    elsif x > y   
+    elsif x_target < x
 
       #bottom to top and right to left
       while x > x_target do 
@@ -162,7 +160,7 @@ class Piece < ApplicationRecord
     elsif x_position_change == y_position_change
 
       check_diagonal(x_target, y_target) 
-      
+
     else
       raise "Error Invalid move"
     end
