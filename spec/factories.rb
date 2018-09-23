@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :piece do
+    type {"King"}
+
+  end
+  
   factory :king do
     
   end
@@ -19,16 +24,21 @@ FactoryBot.define do
   end
   factory :user do
     sequence :email do |n|
-      "dummyEmail#{n}@gmail.com"
+      "dummiEmail#{n}@gmail.com"
     end
-    password "secretPassword"
-    password_confirmation "secretPassword"
+    password {"secretPassword"}
+    password_confirmation {"secretPassword"}
   end
   
   factory :game do
-    name "test"
-    id 2
-    user_black_id 1
+
+    name {"test"}
+    id {3}
+    user_black_id {1}
 
   end
+
+  
+
+
 end
