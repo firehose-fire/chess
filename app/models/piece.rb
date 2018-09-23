@@ -23,8 +23,8 @@ class Piece < ApplicationRecord
 
   def is_occupied?(x,y)
     # search the pieces database and see if x, y are occupied 
-      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?
-    
+      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).first.present?
+      return @piece
   end
 
 
@@ -88,40 +88,51 @@ class Piece < ApplicationRecord
 
   end
 
-  # Define method using x and y target coordinates to see if move is diaganol
-  def check_diaganol(x_target, y_target)
+  # Define method using x and y target coordinates to see if move is diagonal
+  def check_diagonal(x_target, y_target)
     x = coordinate_x
     y = coordinate_y
 
-    #top to bottom and left to right
-    while x < x_target do 
-      x = x + 1 
-      y = y -1
-      return true if is_occupied?(x, y)
-    end
+    
+    
+    if x == y
 
-    #top to bottom and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y - 1
-      return true if is_occupied?(x, y)
-    end
+      #bottom to top and left to right
+      while x < x_target do 
+        x = x + 1 
+        y = y + 1
+        return is_occupied?(x, y)
+      end
 
-    #bottom to top and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
-    end
+      #top to bottom and right to left
+      while x > x_target do 
+        x = x - 1 
+        y = y - 1
+        return is_occupied?(x, y)
+      end
 
-    #bottom to top and left to right
-    while y < y_target do 
-      x = x + 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
-    end
+    elsif x < y
+          
+      #top to bottom and left to right
+      while x < x_target do 
+        x = x + 1 
+        y = y - 1
+        return is_occupied?(x, y)
+      end
 
-    return false
+    
+    elsif x > y   
+
+      #bottom to top and right to left
+      while x > x_target do 
+        x = x - 1 
+        y = y + 1
+        return is_occupied?(x, y)
+      end 
+    else  
+
+      false
+    end
   end
 
 
@@ -139,16 +150,19 @@ class Piece < ApplicationRecord
     
     # is the path horizontal
     if  y_position_change == 0 && x_position_change > 0
-      # puts "I'm moving horizontal"
-     check_horizontal(x_target, y_target)
+
+      check_horizontal(x_target, y_target)
     
     # is the path vertical
     elsif x_position_change == 0 && y_position_change > 0
 
       check_vertical(x_target, y_target)
+
     # is the path diaganol
     elsif x_position_change == y_position_change
-      check_diaganol(x_target, y_target) 
+
+      check_diagonal(x_target, y_target) 
+      
     else
       raise "Error Invalid move"
     end
