@@ -4,7 +4,7 @@ RSpec.describe Pawn, type: :model do
   before(:all) do
     game = FactoryBot.build(:game, id: 4)
     user = FactoryBot.build(:user, id: 4)
-    @pawn = FactoryBot.build(:pawn, coordinate_x: 0, coordinate_y: 7)
+    @pawn = FactoryBot.build(:pawn, coordinate_x: 0, coordinate_y: 6)
     @pawn1 = FactoryBot.build(:pawn, coordinate_x: 0, coordinate_y: 1)
     @pawn2 = FactoryBot.create(:pawn, coordinate_x: 5, coordinate_y: 1)
     @pawn2.update_attributes(coordinate_y: 2)
@@ -12,12 +12,12 @@ RSpec.describe Pawn, type: :model do
 
 
   describe 'move_one_space?' do
-    it 'return true if the pawn moves one space' do
-      expect(@pawn.move_one_space?(0, 6)).to eq(true)
-    end
-
-    it 'return false if the pawn moves 2 spaces' do
-      expect(@pawn.move_one_space?(0, 5)).to eq(false)
+    it 'return true if the pawn can move one space' do
+      if is_occupied?(0, 5)
+        expect(@pawn.move_one_space?(0, 5)).to eq(false)
+      else
+        expect(@pawn.move_one_space?(0, 5)).to eq(true)
+      end
     end
   end
 

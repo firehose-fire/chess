@@ -3,7 +3,7 @@ class Pawn < Piece
   attr_accessor :has_moved
 
   def move_one_space?(x, y)
-    (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 1
+    is_occupied?(x, y) ? nil : (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 1
   end
 
   def move_two_spaces?(x, y)
