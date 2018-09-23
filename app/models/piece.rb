@@ -54,31 +54,41 @@ class Piece < ApplicationRecord
     y = coordinate_y
 
     #top to bottom and left to right
-    while x < x_target do 
-      x = x + 1 
-      y = y -1
-      return true if is_occupied?(x, y)
+    if x < x_target and y > y_target
+      while x < x_target do 
+        x = x + 1 
+        y = y - 1
+        return true if is_occupied?(x, y)
+      end
     end
 
     #top to bottom and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y - 1
-      return true if is_occupied?(x, y)
+    if x > x_target and y > y_target
+      while x > x_target do 
+        x = x - 1 
+        y = y - 1
+        return true if is_occupied?(x, y)
+      end
     end
 
     #bottom to top and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
+    if x > x_target and y < y_target
+      while x > x_target do 
+        x = x - 1 
+        y = y + 1
+        
+        return true if is_occupied?(x, y)
+      end
     end
 
     #bottom to top and left to right
-    while y < y_target do 
-      x = x + 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
+    if x < x_target and y < y_target
+      while x < x_target do 
+        x = x + 1 
+        y = y + 1
+        puts x,y
+        return true if is_occupied?(x, y)
+      end
     end
 
     return false
@@ -99,7 +109,7 @@ class Piece < ApplicationRecord
     
     # is the path horizontal
     if  y_position_change == 0 && x_position_change > 0
-      # puts "I'm moving horizontal"
+
      check_horizontal(x_target, y_target)
     
     # is the path vertical
