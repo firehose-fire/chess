@@ -77,9 +77,9 @@ RSpec.describe Piece, type: :model do
     end
 
      it "should return false if there is NOT piece obstructing the horizontal left to right" do
-      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
-      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
-      expect(piece.is_obstructed?(5,0)).to eq(false)
+      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 3 )
+      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 2)
+      expect(piece.is_obstructed?(5,3)).to eq(false)
     end
 
     #DIAGANOL
