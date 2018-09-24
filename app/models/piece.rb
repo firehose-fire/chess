@@ -84,10 +84,7 @@ class Piece < ApplicationRecord
 
   end
 
-<<<<<<< HEAD
 
-=======
->>>>>>> master
  # Define method using x and y target coordinates to see if move is diaganol
   def check_diaganol(x_target, y_target)
 
@@ -160,7 +157,7 @@ class Piece < ApplicationRecord
     # is the path diaganol
     elsif x_position_change == y_position_change
 
-      check_diaganoll(x_target, y_target) 
+      check_diaganol(x_target, y_target) 
 
     else
       raise "Error Invalid move"

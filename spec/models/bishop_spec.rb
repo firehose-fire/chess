@@ -31,7 +31,9 @@ RSpec.describe Bishop, type: :model do
     end
 
     it "should return false if rook move is valid but obstructed" do
-      obstructing_piece = FactoryBot.build(:piece, coordinate_x: 4, coordinate_y: 4)
+      obstructing_piece = FactoryBot.create(:piece, coordinate_x: 2, coordinate_y: 4)
+      expect(@bishop.valid_move?(1,5)).to eq(false)
+      obstructing_piece2 = FactoryBot.create(:piece, coordinate_x: 4, coordinate_y: 4)
       expect(@bishop.valid_move?(5,5)).to eq(false)
 
     end
