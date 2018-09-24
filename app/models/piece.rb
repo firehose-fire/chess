@@ -157,7 +157,7 @@ class Piece < ApplicationRecord
     # is the path diaganol
     elsif x_position_change == y_position_change
 
-      check_diagonal(x_target, y_target) 
+      check_diaganoll(x_target, y_target) 
 
     else
       raise "Error Invalid move"
