@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   it 'populate_game' do
-    user1 = FactoryBot.create(:user)
-    user2 = FactoryBot.create(:user)
+    user1 = FactoryBot.build(:user)
+    user2 = FactoryBot.build(:user)
 
-    game = FactoryBot.create(:game, user_white_id: user1.id, user_black_id: user2.id)
+    game = FactoryBot.build(:game, user_white_id: user1.id, user_black_id: user2.id)
     game.populate_the_game
     expect(game.populate_the_game).to be_valid
 
