@@ -122,7 +122,6 @@ class Piece < ApplicationRecord
       while x < x_target do 
         x = x + 1 
         y = y + 1
-        puts x,y
         return true if is_occupied?(x, y)
       end
     end
