@@ -21,11 +21,15 @@ module PiecesHelper
   end
 
   def not_selected_square(get_square_at_click)
-    link_to 'piece', piece_path(piece) if piece                                                           
+    link_to 'piece', piece_path(piece) if piece                                                          
   end
 
   def link_to_square(row, column)
     link_to 'square', piece_path(@selected_piece)
   end
+
+  # def link_to_piece(piece)
+  #   link_to 'piece', piece_path(piece) if piece
+  # end
 
 end

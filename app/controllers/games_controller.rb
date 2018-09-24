@@ -25,9 +25,12 @@ class GamesController < ApplicationController
     end
   end
 
-  # def piece
-  #   @piece ||= Piece.find_by_id!(piece[:id])  
-  # end
+  private
+
+  def game_params
+    params.require(:game).permit(:id, :user_id)
+  end
+
 
   
 end
