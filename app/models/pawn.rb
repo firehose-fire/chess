@@ -11,7 +11,7 @@ class Pawn < Piece
   end
 
   def capture_diagonal?(x, y)
-    if check_diaganol(x, y) && single_diagonal_move?(x,y)
+    if check_diaganol(x, y) && single_diagonal_move?(x, y)
       move_to?(x, y)
     end
   end

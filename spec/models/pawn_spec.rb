@@ -46,9 +46,10 @@ RSpec.describe Pawn, type: :model do
 
   describe 'capture_diagonal?' do
     it 'return true if can capture a diagonal' do
-      pawn_white = 
-      pawn_black = 
-      expect(@pawn3.capture_diagonal?(7, 2)).to eq(true)
+      pawn_white = FactoryBot.build(:pawn, piece_color: 'white', coordinate_x: 6, coordinate_y: 1)
+      pawn_black = @pawn4 = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: 7, coordinate_y: 6)
+      pawn_black.update_attributes(coordinate_y: 2)
+      expect(pawn_white.capture_diagonal?(7, 2)).to eq(true)
     end
   end
 end
