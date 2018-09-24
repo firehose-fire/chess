@@ -6,60 +6,22 @@ class Piece < ApplicationRecord
   
   def captured?(new_x, new_y)
     target_move = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    if defined?(target_move.user_id)
+      if(target_move.user_id == self.user_id)
+        raise RuntimeError
+      else
+        target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
+      end
+    end
+  end
 
+  def move_to!(new_x, new_y)
+    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
+  end
 
   def is_occupied?(x,y)
     # search the pieces database and see if x, y are occupied 
-      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?
-    
-  end
-
-# Define method using x and y target coordinates to see if move is horizontal
-  def check_horizontal(x_target, y_target)
-    #left to right
-    if coordinate_x < x_target
-      (coordinate_x+1..x_target-1).each do |x|
-        return true if is_occupied?(x, y_target)
-      end
-        return false
-    end
-    #righ to left
-    if x_target < coordinate_x
-      (x_target+1..coordinate_x-1).each do |x|
-        return true if is_occupied?(x, y_target)
-      end
-        return false
-    end
-
-
-  end
-
-
-  # Define method using x and y target coordinates to see if move is vertical
-  def check_vertical(x_target, y_target)
-    #bottom to top
-    if coordinate_y < y_target
-      (coordinate_y+1..y_target-1).each do |y|
-        return true if is_occupied?(x_target, y)
-    end
-        return false
-    end
-    #top to bottom
-    if y_target < coordinate_y
-      (y_target+1..coordinate_y-1).each do |y|
-        return true if is_occupied?(x_target, y)
-      end
-        return false
-    end
-
-  end
-
-  
-
-  def is_occupied?(x,y)
-    # search the pieces database and see if x, y are occupied 
-      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?
-    
+      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?   
   end
 
 
@@ -84,6 +46,7 @@ class Piece < ApplicationRecord
     false
   end
 
+
 # Define method using x and y target coordinates to see if move is horizontal
   def check_horizontal(x_target, y_target)
     #left to right
@@ -100,8 +63,6 @@ class Piece < ApplicationRecord
       end
         return false
     end
-
-
   end
 
   # Define method using x and y target coordinates to see if move is vertical
@@ -168,37 +129,7 @@ class Piece < ApplicationRecord
 
     return false
   end
-
-
-
-  def is_obstructed?(x_target, y_target)
-    x_position_change = (x_target - coordinate_x).abs
-    y_position_change = (y_target - coordinate_y).abs
-
-    # is the path valid
-   if x_target > 7 || x_target < 0 || y_target > 7 || y_target < 0
-    raise 'Outside of bounds of game'
-   end
-
-      
-    
-    # is the path horizontal
-    if  y_position_change == 0 && x_position_change > 0
-      # puts "I'm moving horizontal"
-     check_horizontal(x_target, y_target)
-    
-    # is the path vertical
-    elsif x_position_change == 0 && y_position_change > 0
-
-      check_vertical(x_target, y_target)
-    # is the path diaganol
-    elsif x_position_change == y_position_change
-      check_diaganol(x_target, y_target) 
-    else
-      raise "Error Invalid move"
-    end
-
-  end
+  
 
   def is_obstructed?(x_target, y_target)
     x_position_change = (x_target - coordinate_x).abs
