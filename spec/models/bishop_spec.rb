@@ -6,7 +6,7 @@ RSpec.describe Bishop, type: :model do
     user = FactoryBot.build(:user)
     @bishop = FactoryBot.build(:bishop, coordinate_x: 3, coordinate_y: 3, game_id: game.id, user_id: user.id)      
   end
-   describe "bishop valid_move?" do
+   describe "valid_move?" do
     
     it "should return true if the rook piece move is valid (diagonal up right)" do
       expect(@bishop.valid_move?(5,5)).to eq(true)

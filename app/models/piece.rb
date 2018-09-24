@@ -24,7 +24,7 @@ class Piece < ApplicationRecord
   def is_occupied?(x,y)
     # search the pieces database and see if x, y are occupied 
       @piece = Piece.where(coordinate_x: x,  coordinate_y: y).first.present?
-      return @piece
+      
   end
 
 
@@ -94,18 +94,24 @@ class Piece < ApplicationRecord
     y = coordinate_y
         
     if x_target == y_target 
+      puts "x #{x_target} y #{y_target}"
+      puts "x target #{x_target} x #{x}" 
       if x > x_target
+
         #top to bottom and right to left
         while x > x_target do 
           x = x - 1 
           y = y - 1
+          puts "1 #{is_occupied?(x, y)}"
           return is_occupied?(x, y)
+
         end
       else
         #bottom to top and left to right
         while x < x_target do 
           x = x + 1 
           y = y + 1
+          puts "2 #{is_occupied?(x, y)}"
           return is_occupied?(x, y)
         end  
       end
@@ -115,6 +121,7 @@ class Piece < ApplicationRecord
       while x < x_target do 
         x = x + 1 
         y = y - 1
+        puts "3 #{is_occupied?(x, y)}"
         return is_occupied?(x, y)
       end
 
@@ -125,9 +132,10 @@ class Piece < ApplicationRecord
       while x > x_target do 
         x = x - 1 
         y = y + 1
+        puts "4 #{is_occupied?(x, y)}"
         return is_occupied?(x, y)
       end 
-    else  
+     else  
 
       false
     end
