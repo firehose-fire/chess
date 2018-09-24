@@ -1,11 +1,11 @@
 class Piece < ApplicationRecord
   belongs_to :game , optional: true
   belongs_to :user , optional: true
+
   
   
   def captured?(new_x, new_y)
     target_move = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
-
     if defined?(target_move.user_id)
       if(target_move.user_id == self.user_id)
         raise RuntimeError
@@ -13,9 +13,7 @@ class Piece < ApplicationRecord
         target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
       end
     end
-
   end
-
 
   def move_to!(new_x, new_y)
     captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
@@ -23,9 +21,31 @@ class Piece < ApplicationRecord
 
   def is_occupied?(x,y)
     # search the pieces database and see if x, y are occupied 
-      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?
-    
+      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?   
   end
+
+
+  def is_diagonal_move?(x_target, y_target)
+    if (self.coordinate_x - x_target).abs == (self.coordinate_y - y_target).abs
+      return true
+    end
+    false
+  end
+
+  def is_vertical_move?(x_target, y_target)
+    if self.coordinate_x == x_target && self.coordinate_y != y_target
+      return true
+    end
+    false
+  end
+
+  def is_horizontal_move?(x_target, y_target)
+    if self.coordinate_x != x_target && self.coordinate_y == y_target
+      return true
+    end
+    false
+  end
+
 
 # Define method using x and y target coordinates to see if move is horizontal
   def check_horizontal(x_target, y_target)
@@ -43,8 +63,6 @@ class Piece < ApplicationRecord
       end
         return false
     end
-
-
   end
 
   # Define method using x and y target coordinates to see if move is vertical
@@ -66,43 +84,51 @@ class Piece < ApplicationRecord
 
   end
 
-  # Define method using x and y target coordinates to see if move is diaganol
+ # Define method using x and y target coordinates to see if move is diaganol
   def check_diaganol(x_target, y_target)
     x = coordinate_x
     y = coordinate_y
 
     #top to bottom and left to right
-    while x < x_target do 
-      x = x + 1 
-      y = y -1
-      return true if is_occupied?(x, y)
+    if x < x_target and y > y_target
+      while x < x_target do 
+        x = x + 1 
+        y = y - 1
+        return true if is_occupied?(x, y)
+      end
     end
 
     #top to bottom and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y - 1
-      return true if is_occupied?(x, y)
+    if x > x_target and y > y_target
+      while x > x_target do 
+        x = x - 1 
+        y = y - 1
+        return true if is_occupied?(x, y)
+      end
     end
 
     #bottom to top and right to left
-    while x > x_target do 
-      x = x - 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
+    if x > x_target and y < y_target
+      while x > x_target do 
+        x = x - 1 
+        y = y + 1
+        
+        return true if is_occupied?(x, y)
+      end
     end
 
     #bottom to top and left to right
-    while y < y_target do 
-      x = x + 1 
-      y = y + 1
-      return true if is_occupied?(x, y)
+    if x < x_target and y < y_target
+      while x < x_target do 
+        x = x + 1 
+        y = y + 1
+        return true if is_occupied?(x, y)
+      end
     end
 
     return false
   end
-
-
+  
 
   def is_obstructed?(x_target, y_target)
     x_position_change = (x_target - coordinate_x).abs
@@ -117,7 +143,7 @@ class Piece < ApplicationRecord
     
     # is the path horizontal
     if  y_position_change == 0 && x_position_change > 0
-      # puts "I'm moving horizontal"
+
      check_horizontal(x_target, y_target)
     
     # is the path vertical
