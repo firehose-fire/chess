@@ -20,4 +20,18 @@ RSpec.describe GamesController, type: :controller do
 
   end
 
+  describe "games#destroy action" do
+    it "should delete the current game and get redirected" do
+
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game, user_black_id: user.id)
+
+      game.destroy
+
+
+      expect(response).to have_http_status(200)
+    end
+  end
+
+
 end
