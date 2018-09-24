@@ -108,6 +108,7 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(7,7)).to eq(true)
     end
 
+
     #Invalid raises Error 
     # it "raises" do
     #   piece = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 7 )

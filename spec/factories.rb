@@ -26,11 +26,13 @@ FactoryBot.define do
     sequence :email do |n|
       "dummiEmail#{n}@gmail.com"
     end
+
     password {"secretPassword"}
     password_confirmation {"secretPassword"}
     sequence :id do |i|
       "#{i}"
     end
+
   end
   
   factory :game do
@@ -41,6 +43,7 @@ FactoryBot.define do
     sequence :id do |i|
       "#{i}"
     end
+
   end
 
   

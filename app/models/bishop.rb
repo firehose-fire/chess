@@ -8,4 +8,5 @@ class Bishop < Piece
       false         
     end
   end
+
 end
