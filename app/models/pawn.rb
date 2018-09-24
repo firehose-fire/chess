@@ -11,11 +11,14 @@ class Pawn < Piece
   end
 
   def capture_diagonal?(x, y)
-    if check_diaganol(x, y) && (x - coordinate_x).abs == 1 && (y - coordinate_y).abs == 1
+    if check_diaganol(x, y) && single_diagonal_move?(x,y)
       move_to?(x, y)
     end
   end
 
+  def single_diagonal_move?(x, y)
+    (x - coordinate_x).abs == 1 && (y - coordinate_y).abs == 1
+  end
 
   def move_to!(new_x, new_y)
     # how super works: go to the Piece class - execute the move_to! method and when complete
