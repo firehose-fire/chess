@@ -31,7 +31,7 @@
           </tbody>
             <% Game.available.each do |game| %>
               <tr class="game-table-row">
-                <td><%= game.name %></td>
+                <td ><%= game.name %></td>
                 <td><%= game.user_black_id %></td>
                 <td><%= link_to 'Join', game_path(game.id), method: :patch %></td>
               </tr>

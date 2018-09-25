@@ -5,11 +5,11 @@
     <div class="inner">
     <p>this is the inner div - this could display "1 - 8" vertically or whatever</p>
 
-      <table>
+      <table class="chess-table">
         <% 8.times do |row_index| %>
-          <tr>
+          <tr class="chess-row">
             <% 8.times do |col_index| %>
-              <td>
+              <td class="chess-data">
                 <%= piece_image('pawn','white') %>
               </td>
             <% end %>
