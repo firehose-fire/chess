@@ -35,4 +35,23 @@ RSpec.describe Game, type: :model do
 
   end
 
+  describe "is check for the king" do
+
+
+    it "should see if the color black king is in a check position and return true" do
+      user_black = FactoryBot.create(:user)
+      user_white = FactoryBot.create(:user)
+
+      game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id)
+      king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
+      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 2,piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+
+      piece.move_to!(4,3)
+
+      expect(game.is_check?(game.user_black)).to eq true
+
+
+    end
+  end
+
 end
