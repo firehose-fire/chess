@@ -4,7 +4,7 @@
       <% (0..7).each do |column| %>
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
+        <td class="<%= class_highlight %>" data-column=<%= row %> data-row=<%= column %>> <!-- this gives a col and row to table cells-->
 
         <%= form_for(:piece, controller: "pieces", method: "patch") do |f| %>
             <%= f.hidden_field :coordinate_x, value: row %>
