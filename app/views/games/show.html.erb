@@ -1,9 +1,9 @@
 <table class="board">
-  <% (0..7).reverse_each do |column| %>
+  <% (0..7).reverse_each do |row| %>
     <tr> 
-      <% (0..7).each do |row| %>
+      <% (0..7).each do |column| %>
 
-        <% class_highlight = piece_in_row_and_column?(@selected_piece, column, row) ? 'highlighted' : "" %>
+        <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
         <td class="<%= class_highlight %>" data-column=<%= row %> data-row=<%= column %>> <!-- this gives a col and row to table cells-->
           
           

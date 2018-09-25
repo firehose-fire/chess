@@ -18,3 +18,8 @@ td {
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
   background: black;
 }
+
+.highlighted {
+  border: 3px solid orangered;
+}
+

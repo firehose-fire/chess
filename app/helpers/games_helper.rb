@@ -1,9 +1,9 @@
 module GamesHelper
 
-  def piece_image(type, color)    
+  def piece_image(type, color)
     image_tag "#{color}-#{type}.svg"
   end
-  
+
   # Find all of the squares that do not have pieces in them!
 
   def get_piece_at_click(pieces, row, column)
