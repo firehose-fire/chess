@@ -1,10 +1,10 @@
-<table class="chess-table">
+<table class="board">
   <% (0..7).reverse_each do |column| %>
-    <tr class="chess-row"> 
+    <tr> 
       <% (0..7).each do |row| %>
 
-        <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %> chess-row" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
+        <% class_highlight = piece_in_row_and_column?(@selected_piece, column, row) ? 'highlighted' : "" %>
+        <td class="<%= class_highlight %>" data-column=<%= row %> data-row=<%= column %>> <!-- this gives a col and row to table cells-->
           
           
           

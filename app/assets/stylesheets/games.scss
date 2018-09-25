@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.chess-table {
+table {
   margin: auto;
   border: collapse;
   background: white;
@@ -10,11 +10,11 @@
   border-collapse: collapse;
 }
 
-.chess-data {
+td {
   width: 75px;
   height: 75px;
 }
 
-.chess-row:nth-child(odd) .chess-data:nth-child(even), .chess-row:nth-child(even) .chess-data:nth-child(odd) {
+tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
   background: black;
 }
