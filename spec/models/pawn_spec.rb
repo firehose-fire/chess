@@ -66,4 +66,34 @@ RSpec.describe Pawn, type: :model do
       expect(pawn_white.capture_diagonal?(5, 5)).to eq(true)
     end
   end
+
+  describe 'pawn_valid_move?' do
+    it 'return true for 2 space move with no obstruction' do
+      pawn_white = FactoryBot.build(:pawn, piece_color: 'white', coordinate_x: 5, coordinate_y: 6, user_id: 4)
+      pawn_black = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: 5, coordinate_y: 1, user_id: 5)
+      pawn_black.update_attributes(coordinate_y: 3)
+      expect(pawn_black.pawn_valid_move?(5, 5)).to eq(true)
+    end
+
+    it 'return true for 1 space move with no obstruction' do
+      pawn_white = FactoryBot.build(:pawn, piece_color: 'white', coordinate_x: 5, coordinate_y: 6, user_id: 4)
+      pawn_black = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: 5, coordinate_y: 1, user_id: 5)
+      pawn_black.update_attributes(coordinate_y: 3)
+      expect(pawn_black.pawn_valid_move?(5, 4)).to eq(true)
+    end
+
+    it 'return false for 2 space move with obstruction' do
+      pawn_white = FactoryBot.build(:pawn, piece_color: 'white', coordinate_x: 2, coordinate_y: 6, user_id: 4)
+      pawn_black = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: 2, coordinate_y: 1, user_id: 5)
+      pawn_white.update_attributes(coordinate_y: 5)
+      expect(pawn_black.pawn_valid_move?(5, 6)).to eq(false)
+    end
+
+    it 'return false for 1 space move with obstruction' do
+      pawn_white = FactoryBot.build(:pawn, piece_color: 'white', coordinate_x: 2, coordinate_y: 6, user_id: 4)
+      pawn_black = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: 2, coordinate_y: 1, user_id: 5)
+      pawn_white.update_attributes(coordinate_y: 5)
+      expect(pawn_black.pawn_valid_move?(5, 6)).to eq(false)
+    end
+  end
 end
