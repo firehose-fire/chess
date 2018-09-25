@@ -32,13 +32,11 @@ FactoryBot.define do
     sequence :id do |i|
       "#{i}"
     end
-    
+
   end
   
   factory :game do
-
     name {"test"}
-
     user_black_id {1}
     sequence :id do |i|
       "#{i}"
