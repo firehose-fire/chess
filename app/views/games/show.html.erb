@@ -1,25 +1,21 @@
-<div class="outer">
- <p>this is the outer div - could be a title, user info display, buttons or something</p>
-  <div class="middle">
-  <p>this is the middle div - could be more information (maybe display "A - H" horizontally)</p>
-    <div class="inner">
-    <p>this is the inner div - this could display "1 - 8" vertically or whatever</p>
+<table class="chess-table">
+  <% (0..7).reverse_each do |column| %>
+    <tr class="chess-row"> 
+      <% (0..7).each do |row| %>
 
-      <table class="chess-table">
-        <% 8.times do |row_index| %>
-          <tr class="chess-row">
-            <% 8.times do |col_index| %>
-              <td class="chess-data">
-                <%= piece_image('pawn','white') %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %> 
-      </table>
-      
-    </div>
-  </div>
-</div>
+        <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
+        <td class="<%= class_highlight %> chess-row" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
+          
+          
+          
+        <%= link_to_piece get_piece_at_click(@game.pieces, row, column) %>
+
+        </td>
+
+      <% end  %>
+    </tr>
+  <% end %> 
+</table>
 
 <%= link_to "Forfeit", @games,  :method => :delete, data: { confirm: 'Are you sure you want to forfeit?'}, class: 'btn btn-secondary btn-lg'%>
 

@@ -2,15 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+<<<<<<< HEAD
 .chess-table {
   margin: auto;
+=======
+table {
+  // margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 0.5em;
+>>>>>>> WIP_move_piece_with_a_form
   border: collapse;
   background: white;
-  border: 5px solid #333;
+  border: 3px solid #333;
   border-collapse: collapse;
 }
 
+<<<<<<< HEAD
 .chess-data {
+=======
+.highlighted {
+  border: 3px solid orangered;
+}
+
+td {
+>>>>>>> WIP_move_piece_with_a_form
   width: 75px;
   height: 75px;
 }
