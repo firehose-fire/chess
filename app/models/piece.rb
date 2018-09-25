@@ -6,14 +6,22 @@ class Piece < ApplicationRecord
   
   def captured?(new_x, new_y)
     target_move = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
-    if defined?(target_move.user_id)
-      if(target_move.user_id == self.user_id)
+
+    if defined?(target_move.user)
+      if(target_move.user == self.user)
+
         raise RuntimeError
       else
         target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
       end
     end
   end
+
+  def is_capture_valid?(new_x, new_y)
+    target_piece = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    (!target_piece || target_piece.user == self.user) ? false : true
+  end
+
 
   def move_to!(new_x, new_y)
     captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
