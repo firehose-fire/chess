@@ -1,4 +1,9 @@
-
+      <% Game.all.each do |game| %>
+        <li>Game: <%= game.name %><%= link_to 'Join', game_path(game.id) %> </li>
+      <% end %>
+  
+  
+  
   <div class="games_available col-10">
     <h3>Available Games</h3>
     <ul id="games_available" >
