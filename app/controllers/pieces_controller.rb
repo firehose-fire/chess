@@ -3,17 +3,16 @@ class PiecesController < ApplicationController
   def show
     @selected_piece = Piece.find(params[:id])
     @game = @selected_piece.game
-    # render "games/show"
   end
 
   def update
     @selected_piece = Piece.find(params[:id])
     @selected_piece.update_attribute(:coordinate_x, :coordinate_y)
     @game = @selected_piece.game
-    redirect_to game_path
+    redirect_to game_path(@game)
   end
 
-  
+
   private
 
   def piece_params

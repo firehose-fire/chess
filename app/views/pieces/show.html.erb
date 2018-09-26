@@ -6,7 +6,7 @@
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
         <td class="<%= class_highlight %>" data-column=<%= row %> data-row=<%= column %>> <!-- this gives a col and row to table cells-->
 
-        <%= link_to_square %>
+        <%= link_to_square get_square_at_click(row, column) %>
 
         </td>
 
