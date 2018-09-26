@@ -1,10 +1,10 @@
-<table class="board">
-  <% (0..7).reverse_each do |row| %>
+<table>
+  <% (0..7).reverse_each do |column| %>
     <tr> 
-      <% (0..7).each do |column| %>
+      <% (0..7).each do |row| %>
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %>" data-column=<%= row %> data-row=<%= column %>> <!-- this gives a col and row to table cells-->
+        <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
           
           
           

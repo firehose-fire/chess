@@ -9,10 +9,11 @@ class PiecesController < ApplicationController
   def update
     @selected_piece = Piece.find(params[:id])
     @selected_piece.update_attribute(:coordinate_x, :coordinate_y)
+    @game = @selected_piece.game
     redirect_to game_path
   end
 
-
+  
   private
 
   def piece_params
