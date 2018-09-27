@@ -20,9 +20,7 @@ FactoryBot.define do
     
   end
   factory :pawn do
-    trait :white do
-      piece_color 'white'
-    end
+  
   end
 
   # create(:pawn, :white)

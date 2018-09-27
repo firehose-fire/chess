@@ -1,7 +1,7 @@
 class Pawn < Piece
 
   attr_accessor :has_moved
-  
+
   def horizontal_move?(x)
     x_move = (x - coordinate_x).abs
     x_move != 0
@@ -54,5 +54,4 @@ class Pawn < Piece
     super(new_x, new_y)
     @has_moved = true
   end
-
 end
