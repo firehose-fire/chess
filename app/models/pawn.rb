@@ -6,11 +6,11 @@ class Pawn < Piece
     x_move = (x - coordinate_x).abs
     x_move != 0
   end
-  
+
   def move_up?(y)
     (y - coordinate_y).abs > coordinate_y
   end
- 
+
   def move_down?(y)
     (y - coordinate_y).abs < coordinate_y
   end

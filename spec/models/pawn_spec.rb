@@ -24,7 +24,7 @@ RSpec.describe Pawn, type: :model do
   describe 'move_one_space?' do
     it 'return true if the pawn can move one space white pawn' do
       white_pawn = create_white_pawn(x: 0, y: 6, user_id: 4)
-      expect(white_pawn.move_one_space?(0, 5)).to eq(true)
+      expect(white_pawn.move_one_space?(0, 5)).to eq(true) #undo
     end
 
     it 'return true if the pawn can move one space black pawn' do
@@ -74,13 +74,13 @@ RSpec.describe Pawn, type: :model do
       expect(white_pawn.capture_diagonal?(7, 5)).to eq(true)
     end
 
-    it 'return true if can capture a diagonal' do
+    it 'return true if can capture diagonally to the right' do
       white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
       black_pawn = create_black_pawn(x: 3, y: 3, user_id: 5)
       expect(black_pawn.capture_diagonal?(4, 4)).to eq(true)
     end
 
-    it 'return true if can capture a diagonal' do
+    it 'return true if can capture a diagonal' do # to the left
       white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
       black_pawn = create_black_pawn(x: 5, y: 3, user_id: 5)
       expect(black_pawn.capture_diagonal?(4, 4)).to eq(true)
