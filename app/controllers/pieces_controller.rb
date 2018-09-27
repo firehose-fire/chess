@@ -2,15 +2,11 @@ class PiecesController < ApplicationController
 
   def show
     @selected_piece = Piece.find(params[:id])
-    byebug
     @game = @selected_piece.game
-    byebug
   end
 
   def update
-    byebug
     @selected_piece = Piece.find(params[:id])
-    byebug
     @selected_piece.update_attribute(:coordinate_x, row)
     @selected_piece.update_attribute(:coordinate_y, column)
     @game = @selected_piece.game
