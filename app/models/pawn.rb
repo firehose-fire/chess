@@ -8,19 +8,19 @@ class Pawn < Piece
   end
   
   def move_up?(y)
-    (y - coordinate_y) > 1 
+    (y - coordinate_y).abs > coordinate_y
   end
  
   def move_down?(y)
-    (y - coordinate_y) < 6
+    (y - coordinate_y).abs < coordinate_y
   end
   
   def move_one_space?(x, y)
-    (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 1 unless check_vertical(x, y) == true
+    (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 1 
   end
   
   def move_two_spaces?(x, y)
-    (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 2 unless has_moved == true || check_vertical(x, y) == false
+    (x - coordinate_x).abs < 1 && (y - coordinate_y).abs == 2 && @has_moved != true
   end
   
   def single_diagonal_move?(x, y)
@@ -33,10 +33,16 @@ class Pawn < Piece
     end
   end
 
+  def in_passing? 
+    #to be worked on later
+  end
+
   def pawn_valid_move?(x, y)
-    return false if horizontal_move?(x)
-    return false if move_down?(y) && piece_color == 'black'
-    return false if move_up?(y) && piece_color == 'white'
+    return false if is_occupied?(x, y) ||
+                    is_obstructed?(x, y) ||
+                    horizontal_move?(x) ||
+                    move_down?(y) && piece_color == 'black' ||
+                    move_up?(y) && piece_color == 'white'
     move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
   end
 

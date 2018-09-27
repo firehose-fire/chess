@@ -20,8 +20,12 @@ FactoryBot.define do
     
   end
   factory :pawn do
-    
+    trait :white do
+      piece_color 'white'
+    end
   end
+
+  # create(:pawn, :white)
   factory :user do
     sequence :email do |n|
       "dummiEmail#{n}@gmail.com"
