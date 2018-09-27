@@ -53,6 +53,6 @@ class Pawn < Piece
     # execute any new code we have here.
     super(new_x, new_y)
     @has_moved = true
-  end
+  
 
 end

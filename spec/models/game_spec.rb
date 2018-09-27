@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   it 'populate_game' do
-    user1 = FactoryBot.create(:user)
-    user2 = FactoryBot.create(:user)
+    user1 = FactoryBot.build(:user)
+    user2 = FactoryBot.build(:user)
 
-    game = FactoryBot.create(:game, user_white_id: user1.id, user_black_id: user2.id)
+    game = FactoryBot.build(:game, user_white_id: user1.id, user_black_id: user2.id)
     game.populate_the_game
     expect(game.populate_the_game).to be_valid
 
@@ -33,6 +33,25 @@ RSpec.describe Game, type: :model do
     expect(game.piece_at(3, 7)).to have_attributes(type: 'Queen', piece_color: 'black')
     expect(game.piece_at(3, 0)).to have_attributes(type: 'Queen', piece_color: 'white')
 
+  end
+
+  describe "is check for the king" do
+
+
+    it "should see if the color black king is in a check position and return true" do
+      user_black = FactoryBot.create(:user)
+      user_white = FactoryBot.create(:user)
+
+      game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id)
+      king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
+      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 2,piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+
+      piece.move_to!(4,3)
+
+      expect(game.is_check?(game.user_black)).to eq true
+
+
+    end
   end
 
 end
