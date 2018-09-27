@@ -6,9 +6,8 @@ module PiecesHelper
     link_to 'move', piece_path(piece), :method => :patch
   end
 
-  def get_square_at_click(row, column)
-    coordinate_x = row
-    coordinate_y = column
+  def get_square_at_click(piece, row, column)
+    
   end
 
   # def move_to_square?(square, piece, row, column)

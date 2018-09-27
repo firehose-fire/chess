@@ -14,7 +14,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @selected_piece = nil
+    # @selected_piece = nil
   end
 
   def update
