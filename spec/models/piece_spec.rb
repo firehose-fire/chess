@@ -70,30 +70,31 @@ RSpec.describe Piece, type: :model do
     end
 
 
-     it "should return false if there is NOT piece obstructing the horizontal left to right" do
+    it "should return false if there is NOT piece obstructing the horizontal left to right" do
       piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
       expect(piece.is_obstructed?(5,0)).to eq(false)
     end
 
      it "should return false if there is NOT piece obstructing the horizontal left to right" do
-      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
-      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
-      expect(piece.is_obstructed?(5,0)).to eq(false)
+      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 3 )
+      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 2)
+      expect(piece.is_obstructed?(5,3)).to eq(false)
     end
 
     #DIAGANOL
-    it "should return true if there is a piece obstructing the diaganol path top to bottom and left to right" do
+    it "should return true if there is a piece obstructing the diagonal path top to bottom and left to right" do
       piece = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 7 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 2, coordinate_y: 5)
       expect(piece.is_obstructed?(7,0)).to eq(true)
     end
 
-    it "should return true if there is a piece obstructing the diaganol path top to bottom and right to left" do
+    it "should return true if there is a piece obstructing the diagonal path top to bottom and right to left" do
       piece = FactoryBot.create(:piece, coordinate_x: 7, coordinate_y: 7 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 1, coordinate_y: 1)
       expect(piece.is_obstructed?(0,0)).to eq(true)
     end
+
 
     it "should return true if there is a piece obstructing the diaganol path bottom to top and right to left" do
       piece = FactoryBot.create(:piece, coordinate_x: 7, coordinate_y: 0 )
@@ -109,11 +110,11 @@ RSpec.describe Piece, type: :model do
 
 
     #Invalid raises Error 
-    it "raises" do
-      piece = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 7 )
-      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 2, coordinate_y: 5)
-      expect { piece.is_obstructed?(8,8) }.to raise_error
-    end
+    # it "raises" do
+    #   piece = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 7 )
+    #   piece_obstruction = FactoryBot.create(:piece, coordinate_x: 2, coordinate_y: 5)
+    #   expect { piece.is_obstructed?(8,8) }.to raise_error
+    # end
     
   end
 end

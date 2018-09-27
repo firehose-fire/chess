@@ -13,6 +13,13 @@ class Piece < ApplicationRecord
         target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
       end
     end
+
+  end
+
+  def is_capture_valid?(new_x, new_y)
+    target_piece = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    (!target_piece || target_piece.user == self.user) ? false : true
+
   end
 
   def move_to!(new_x, new_y)
@@ -84,10 +91,13 @@ class Piece < ApplicationRecord
 
   end
 
+
  # Define method using x and y target coordinates to see if move is diaganol
   def check_diaganol(x_target, y_target)
+
     x = coordinate_x
     y = coordinate_y
+                
 
     #top to bottom and left to right
     if x < x_target and y > y_target
@@ -150,9 +160,12 @@ class Piece < ApplicationRecord
     elsif x_position_change == 0 && y_position_change > 0
 
       check_vertical(x_target, y_target)
+
     # is the path diaganol
     elsif x_position_change == y_position_change
+
       check_diaganol(x_target, y_target) 
+
     else
       raise "Error Invalid move"
     end
