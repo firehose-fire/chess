@@ -21,12 +21,12 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     if current_user 
       @game.update(user_white_id: current_user.id)     
-    redirect_to root_path
+    redirect_to game_path
     end
   end
 
   def destroy
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:id])  
     if current_user
       @game.destroy
     redirect_to root_path
