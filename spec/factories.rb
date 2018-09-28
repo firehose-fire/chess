@@ -20,8 +20,10 @@ FactoryBot.define do
     
   end
   factory :pawn do
-    
+  
   end
+
+  # create(:pawn, :white)
   factory :user do
     sequence :email do |n|
       "dummiEmail#{n}@gmail.com"
