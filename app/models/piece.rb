@@ -13,6 +13,13 @@ class Piece < ApplicationRecord
         target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
       end
     end
+
+  end
+
+  def is_capture_valid?(new_x, new_y)
+    target_piece = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    (!target_piece || target_piece.user == self.user) ? false : true
+
   end
 
   def move_to!(new_x, new_y)

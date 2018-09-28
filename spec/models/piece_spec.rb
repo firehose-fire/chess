@@ -71,6 +71,7 @@ RSpec.describe Piece, type: :model do
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
      it "should return false if there is NOT piece obstructing the horizontal left to right" do
       piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
@@ -80,6 +81,9 @@ RSpec.describe Piece, type: :model do
 =======
 >>>>>>> deab9d757d9b44a5b506a598e40022a33ea654cd
      it "should return false if there is NOT piece obstructing the horizontal left to right" do
+=======
+    it "should return false if there is NOT piece obstructing the horizontal left to right" do
+>>>>>>> 63f2efa0ecf6bd770f04164d97111d1d6956c5ed
       piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
       expect(piece.is_obstructed?(5,0)).to eq(false)

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Rook, type: :model do  
 
+
   before(:all) do 
     game = FactoryBot.build(:game)
     user = FactoryBot.build(:user)

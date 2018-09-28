@@ -1,9 +1,43 @@
+<div class="container-fluid">
+  <div class="container-img"></div>
+  <nav class="nav">
 
-  <div class="games_available col-10">
-    <h3>Available Games</h3>
-    <ul id="games_available" >
-      <% Game.available.each do |game| %>
-        <li>Game: <%= game.name %><%= link_to 'Join', game_path(game.id), method: :patch %> </li>
-      <% end %>
-    </ul> 
+    <% if user_signed_in? %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+      <!--<%= link_to 'My Games', class: 'nav-link' %>-->
+    <% else %>
+      <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+      <!--<%= link_to 'My Games', class: 'nav-link' %>-->
+    <% end %>
+  </nav>
+  <div class="text">
+    <h1>Let's Play A Game</h1>
   </div>
+</div>
+
+
+<section class="games-section">
+  <div class="games_available col-10 offset-1">
+    <h3>Available Listed Games</h3>
+      <table class="table">
+        <thead class="game-table-head">
+          <tr class="game-table-row">
+            <th>Name</th>
+            <th>User</th>
+            <th>Session</th>
+          </tr>
+        </thead>
+        <tbody>
+          </tbody>
+            <% Game.available.each do |game| %>
+              <tr class="game-table-row">
+                <td ><%= game.name %></td>
+                <td><%= game.user_black_id %></td>
+                <td><%= link_to 'Join', game_path(game.id), method: :patch %></td>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+  </div>
+</section>
+
