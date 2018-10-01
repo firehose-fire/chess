@@ -1,11 +1,9 @@
 class Piece < ApplicationRecord
-  belongs_to :game , optional: true
-  belongs_to :user , optional: true
-
-  
+  belongs_to :game, optional: true
+  belongs_to :user, optional: true
   
   def captured?(new_x, new_y)
-    target_move = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    target_move = game.pieces.where(coordinate_x: new_x, coordinate_y: new_y).first
     if defined?(target_move.user_id)
       if(target_move.user_id == self.user_id)
         raise RuntimeError
@@ -17,18 +15,19 @@ class Piece < ApplicationRecord
   end
 
   def is_capture_valid?(new_x, new_y)
-    target_piece = Piece.where(coordinate_x: new_x, coordinate_y: new_y).first
+    target_piece = game.pieces.where(coordinate_x: new_x, coordinate_y: new_y).first
     (!target_piece || target_piece.user == self.user) ? false : true
 
   end
 
   def move_to!(new_x, new_y)
-    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
+    return false if valid_move?(new_x, new_y) == false
+    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
   end
 
   def is_occupied?(x,y)
     # search the pieces database and see if x, y are occupied 
-      @piece = Piece.where(coordinate_x: x,  coordinate_y: y).present?   
+      @piece = game.pieces.where(coordinate_x: x,  coordinate_y: y).present?   
   end
 
 
