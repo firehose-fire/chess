@@ -80,6 +80,9 @@ class Game < ApplicationRecord
     end
   end
   
+  def can_castle?(kings_position)
+  
+  end
   
   
 end

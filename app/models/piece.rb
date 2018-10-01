@@ -91,10 +91,7 @@ class Piece < ApplicationRecord
 
   end
 
-<<<<<<< HEAD
-=======
 
->>>>>>> deab9d757d9b44a5b506a598e40022a33ea654cd
  # Define method using x and y target coordinates to see if move is diaganol
   def check_diaganol(x_target, y_target)
 

@@ -54,4 +54,14 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe "can castle?" do
+    it "should see if castling can be done checking if the king has already moved from its position" do
+      user = FactoryBot.build(:user)
+      game = FactoryBot.build(:game)
+
+      king = FactoryBot.create(move: false)
+
+      expect(game.can_castle?(0)).to eq false
+    end
+  end
 end
