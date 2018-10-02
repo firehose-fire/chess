@@ -17,10 +17,7 @@ module GamesHelper
   def get_piece(pieces, row, column)
       pieces.find do |piece|
        piece_in_row_and_column?(piece, row, column)
-     
-      
     end
-
   end
 
   # Find all of the squares that do not have pieces in them!
@@ -34,11 +31,8 @@ module GamesHelper
   # end
 
   def link_to_piece(piece)
-    @piece = [piece.type, piece.piece_color] if piece
-    # @piece_type = @piece[0] if piece
-     
-      piece.piece_color if piece
-      piece.type if piece
+    @piece_id = piece.id if piece 
+    @piece_type = piece.type if piece
   end
 
 end

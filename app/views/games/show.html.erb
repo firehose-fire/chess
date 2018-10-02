@@ -7,9 +7,14 @@
         <td class="<%= class_highlight %> droppable" data-column="<%= column %> " data-row="<%= row %>" > <!-- this gives a col and row to table cells-->
           
           
-          <div id='draggable' class="pieces" >
-        <%= link_to_piece get_piece(@game.pieces, row, column) %> 
+         
+        <% if link_to_piece get_piece(@game.pieces, row, column)  %>
+         <div id='<%= @piece_id %>' class="pieces" >
+        <%= @piece_type %>
+        <%= @piece_id  %>
+        
        </div >
+       <% end %>
         </td>
 
       <% end  %>
