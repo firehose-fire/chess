@@ -30,8 +30,8 @@ RSpec.describe Game, type: :model do
     expect(game.piece_at(1, 7)).to have_attributes(type: 'Knight', piece_color: 'white')
 
     # Queen test for black and white pieces
-    expect(game.piece_at(3, 7)).to have_attributes(type: 'Queen', piece_color: 'black')
-    expect(game.piece_at(3, 0)).to have_attributes(type: 'Queen', piece_color: 'white')
+    expect(game.piece_at(3, 0)).to have_attributes(type: 'Queen', piece_color: 'black')
+    expect(game.piece_at(3, 7)).to have_attributes(type: 'Queen', piece_color: 'white')
 
   end
 

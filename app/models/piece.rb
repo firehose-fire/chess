@@ -26,8 +26,8 @@ class Piece < ApplicationRecord
   end
 
   def is_occupied?(x,y)
-    # search the pieces database and see if x, y are occupied 
-      @piece = game.pieces.where(coordinate_x: x,  coordinate_y: y).present?   
+    # search the pieces database and see if x, y are occupied
+      @piece = Piece.where(game_id: :id, coordinate_x: x,  coordinate_y: y).present?   
   end
 
 
