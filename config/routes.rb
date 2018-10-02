@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   # root 'games#show'
   root 'home#index'
   resources :games
-  resources :pieces
+  resources :pieces do
+    collection do
+    get :update
+    end 
+  end
 end
