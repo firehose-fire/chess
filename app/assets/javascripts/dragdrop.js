@@ -15,7 +15,8 @@ $( function() {
         $.ajax({
           url: "/pieces/" + $piece_id,
           type: "PUT",
-          data: {'coordinate_x': $row, 'coordinate_y': $column },  
+          dataType: "script",
+          data: { 'piece': {'coordinate_x': $row, 'coordinate_y': $column }},  
           success: function(){           
             window.location.reload()
           }
