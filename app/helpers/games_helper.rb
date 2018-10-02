@@ -1,16 +1,14 @@
 module GamesHelper
   
-
   def piece_image(type, color)
-     image_tag "#{color}-#{type}.svg"
-    
+     image_tag "#{color}-#{type}.svg"    
   end
 
   # Find all of the squares that do not have pieces in them!
 
   def get_piece(pieces, row, column)
       pieces.find do |piece|
-       piece_in_row_and_column?(piece, row, column)
+        piece_in_row_and_column?(piece, row, column)
     end
   end
 

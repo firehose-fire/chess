@@ -1,24 +1,16 @@
 
-
 <table id="board" >
   <% (0..7).reverse_each do |column| %>
     <tr> 
       <% (0..7).each do |row| %>
-
-        <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %> droppable" data-column="<%= column %> " data-row="<%= row %>" > <!-- this gives a col and row to table cells-->
-          
-          
-         
+      <!-- this gives a col and row to table cells-->
+        <td class="<%= class_highlight %> droppable" data-column="<%= column %> " data-row="<%= row %>" > 
         <% if link_to_piece get_piece(@game.pieces, row, column)  %>
-         <div id='<%= @piece_id %>' class="pieces" >
-        <%= @piece_type %>
-        <%= @piece_id  %>
-        
-       </div >
-       <% end %>
+          <div id='<%= @piece_id %>' class="pieces" >
+            <%= @piece_type %>            
+          </div >
+        <% end %>
         </td>
-
       <% end  %>
     </tr>
   <% end %> 
