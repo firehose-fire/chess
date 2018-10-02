@@ -1,15 +1,26 @@
 module GamesHelper
+  
 
   def piece_image(type, color)
-    image_tag "#{color}-#{type}.svg"
+     image_tag "#{color}-#{type}.svg"
+    
   end
 
   # Find all of the squares that do not have pieces in them!
 
-  def get_piece_at_click(pieces, row, column)
-    pieces.find do |piece|
-      piece_in_row_and_column?(piece, row, column)    
+  # def get_piece_at_click(pieces, row, column)
+  #   pieces.find do |piece|
+  #     piece_in_row_and_column?(piece, row, column)    
+  #   end
+  # end
+
+  def get_piece(pieces, row, column)
+      pieces.find do |piece|
+       piece_in_row_and_column?(piece, row, column)
+     
+      
     end
+
   end
 
   # Find all of the squares that do not have pieces in them!
@@ -18,8 +29,16 @@ module GamesHelper
     piece && row == piece.coordinate_x && column == piece.coordinate_y      
   end
 
+  # def link_to_piece(piece)
+  #   link_to 'piece', piece_path(piece) if piece
+  # end
+
   def link_to_piece(piece)
-    link_to 'piece', piece_path(piece) if piece
+    @piece = [piece.type, piece.piece_color] if piece
+    # @piece_type = @piece[0] if piece
+     
+      piece.piece_color if piece
+      piece.type if piece
   end
 
 end

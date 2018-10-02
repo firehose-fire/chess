@@ -4,12 +4,12 @@
       <% (0..7).each do |row| %>
 
         <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
+        <td class="<%= class_highlight %> droppable" data-column="<%= column %> " data-row="<%= row %>" > <!-- this gives a col and row to table cells-->
           
           
-          
-        <%= link_to_piece get_piece_at_click(@game.pieces, row, column) %>
-
+          <div id='draggable' class="pieces" >
+        <%= link_to_piece get_piece(@game.pieces, row, column) %> 
+       </div >
         </td>
 
       <% end  %>
