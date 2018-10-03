@@ -34,17 +34,13 @@ class Pawn < Piece
   end
   
   def capture_diagonal?(x, y)
-    check_diaganol(x, y) && single_diagonal_move?(x, y) 
+    check_diaganol(x, y) && single_diagonal_move?(x, y)
   end
-
-  def valid_move?(x, y)
-    return false if is_occupied?(x, y) ||
-                    is_obstructed?(x, y) ||
-                    horizontal_move?(x)
-    move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
-  end
-
- 
 
   
+  def valid_move?(x, y)
+    return false if is_occupied?(x, y) && !check_diaganol(x, y)
+    return false if is_obstructed?(x, y) && !check_diaganol(x, y)
+    move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
+  end
 end
