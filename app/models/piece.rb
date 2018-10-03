@@ -2,7 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game, optional: true
   belongs_to :user, optional: true
   
-  def captured?(new_x, new_y)
+  def captured!(new_x, new_y)
     target_move = Piece.where(game_id: game_id, coordinate_x: new_x, coordinate_y: new_y).first
     if defined?(target_move.piece_color)
       if(target_move.piece_color == piece_color)
@@ -21,11 +21,8 @@ class Piece < ApplicationRecord
 
   def move_to!(new_x, new_y)
     return false if valid_move?(new_x, new_y) == false
-    if captured?(new_x, new_y)
-      update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
-    else
-      update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
-    end
+    captured!(new_x, new_y)
+    update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
   end
 
   def is_occupied?(x, y)
