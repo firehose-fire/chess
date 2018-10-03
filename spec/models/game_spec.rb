@@ -37,7 +37,6 @@ RSpec.describe Game, type: :model do
 
   describe "is check for the king" do
 
-
     it "should see if the color black king is in a check position and return true" do
       user_black = FactoryBot.create(:user)
       user_white = FactoryBot.create(:user)
@@ -53,15 +52,5 @@ RSpec.describe Game, type: :model do
 
     end
   end
-
-  describe "can castle?" do
-    it "should see if castling can be done checking if the king has already moved from its position" do
-      user = FactoryBot.build(:user)
-      game = FactoryBot.build(:game)
-
-      king = FactoryBot.create(move: false)
-
-      expect(game.can_castle?(0)).to eq false
-    end
-  end
+  
 end

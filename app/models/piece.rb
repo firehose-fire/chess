@@ -23,7 +23,7 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(new_x, new_y)
-    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y)
+    captured?(new_x, new_y) ? nil : update_attributes(coordinate_x: new_x, coordinate_y: new_y, move: true)
   end
 
   def is_occupied?(x,y)
@@ -169,6 +169,101 @@ class Piece < ApplicationRecord
     else
       raise "Error Invalid move"
     end
+
+  end
+
+  def rook_piece
+    rook = Piece.where(type: "Rook", move: false, game_id: game_id)
+  end
+
+  def king_piece
+    king = Piece.where(type: "King", move: false, game_id: game_id)
+  end
+
+  def rook_white_queenside?(x, y)
+    white_rook_queenside = rook_piece
+    white_rook_queenside.present?
+  end
+
+  def rook_white_kingside?(x, y)
+    white_rook_kingside = rook_piece
+    white_rook_kingside.present?
+  end
+
+  def rook_black_queenside?(x, y)
+    white_rook_queenside = rook_piece
+    white_rook_queenside.present?
+  end
+
+  def rook_black_kingside?(x, y)
+    white_rook_kingside = rook_piece
+    white_rook_kingside.present?
+  end
+
+  def king_white(x, y)
+    white_king = king_piece
+    white_king.present?
+  end
+
+  def king_black(x, y)
+    king_black = king_piece
+    king_black.present?
+  end
+
+
+  def pieces_have_moved?(x, y)
+    return false if rook_white_queenside?(x, y) || 
+                    rook_white_kingside?(x, y) ||
+                    rook_black_queenside(x, y) ||
+                    rook_white_kingside(x, y) ||
+                    king_white(x, y) ||
+                    king_black(x, y)
+  end
+
+  def queenside_get_xy
+    black_rook_queenside = Piece.where(type: "Rook", move: false, game_id: game_id)
+    x = black_rook_queenside.coordinate_x
+    y = black_rook_queenside.coordinate_y
+    coordinates = (x,y)
+  end
+  
+  def can_castle?(x, y)
+    
+
+
+
+
+
+    #find the white_king
+    white_king = Piece.where(type: "King", move: false).present?
+    white_rook_kingside = Piece.where(type: "Rook", coordinate_x: 0, coordinate_y: 7, move: false).present?
+    white_rook_queenside = Piece.where(type: "Rook", coordinate_x: 7, coordinate_y: 7, move: false).present?
+
+    #has the king moved if not allow castling
+    if white_king == true
+        return true
+      end
+        false
+
+    #has the rook kingside moved if not allow castling
+    if white_rook_kingside == true 
+     if is_obstructed?(x,y) == true
+        puts "Can not castle, obstructed"
+      else
+        puts "You may castle"
+      end
+    end
+
+    
+     #has the rook queenside moved if not allow castling
+     if white_rook_queenside == true
+      if is_obstructed?(x,y) == true
+        puts "Can not castle, obstructed"
+      else
+        puts "You may castle"
+      end
+     end
+
 
   end
 

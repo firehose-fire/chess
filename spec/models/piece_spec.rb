@@ -25,9 +25,12 @@ RSpec.describe Piece, type: :model do
       piece = FactoryBot.create(:piece,
                                 coordinate_x: 3,
                                 coordinate_y: 0,
-                                piece_color: 'black', user_id: 1)
+                                piece_color: 'black', 
+                                user_id: 1,
+                                move: false)
       piece.move_to!(6,3)
       expect([piece.coordinate_x,piece.coordinate_y]).to eq([6,3])
+      expect(piece.move).to eq(true)
     end
   end
   
@@ -69,21 +72,7 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(2, 0)).to eq(true)
     end
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-     it "should return false if there is NOT piece obstructing the horizontal left to right" do
-      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
-      piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
-      expect(piece.is_obstructed?(5,0)).to eq(false)
-    end
-
-=======
->>>>>>> deab9d757d9b44a5b506a598e40022a33ea654cd
-     it "should return false if there is NOT piece obstructing the horizontal left to right" do
-=======
     it "should return false if there is NOT piece obstructing the horizontal left to right" do
->>>>>>> 63f2efa0ecf6bd770f04164d97111d1d6956c5ed
       piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 0 )
       piece_obstruction = FactoryBot.create(:piece, coordinate_x: 0, coordinate_y: 3)
       expect(piece.is_obstructed?(5,0)).to eq(false)
@@ -130,6 +119,79 @@ RSpec.describe Piece, type: :model do
     # end
     
   end
+
+  describe "can castle" do
+    it "should return true if the King has NOT moved" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+
+     expect(white_king.can_castle?(7,7)).to eq true
+    end
+
+    it "should return false if the King HAS moved" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+     white_king.move_to!(4,4)
+
+     expect(white_king.can_castle?(7,7)).to eq false
+    end
+
+    it "should return true if the White Rook Kingside has NOT moved and no obstruction" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+     white_rook_kingside = FactoryBot.create(:rook, coordinate_x: 0, coordinate_y: 7, piece_color: 'white', move: false)
+
+     expect(white_king.can_castle?(0,7)).to eq true
+    end
+
+    it "should return false if the White Rook Kingside has NOT moved and there is an obstruction" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+     white_rook_kingside = FactoryBot.create(:rook, coordinate_x: 0, coordinate_y: 7, piece_color: 'white', move: false)
+     piece_obstruction = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 7)
+     
+     expect(white_king.can_castle?(0,7)).to eq false
+    end
+
+    it "should return false if the White Rook Kingside HAS moved" do
+     white_rook_kingside = FactoryBot.create(:rook, coordinate_x: 0, coordinate_y: 7, piece_color: 'white', move: false)
+
+     white_rook_kingside.move_to!(1,7)
+
+     expect(white_rook_kingside.can_castle?(0,7)).to eq false
+    end
+
+    it "should return true if the White Rook Queenside has NOT moved" do
+     white_rook_queenside = FactoryBot.create(:rook, coordinate_x: 7, coordinate_y: 7, piece_color: 'white', move: false)
+
+     expect(white_rook_queenside.can_castle?(7,7)).to eq true
+    end
+
+    it "should return false if the White Rook Queenside has NOT moved but there is an obstruction" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+     white_rook_queenside = FactoryBot.create(:rook, coordinate_x: 7, coordinate_y: 7, piece_color: 'white', move: false)
+     piece_obstruction = FactoryBot.create(:piece, coordinate_x: 6, coordinate_y: 7)
+
+     expect(white_rook_queenside.can_castle?(7,7)).to eq false
+    end
+
+    it "should return false if the White Rook Queenside HAS moved" do
+     white_rook_queenside = FactoryBot.create(:rook, coordinate_x: 7, coordinate_y: 7, piece_color: 'white', move: false)
+
+     white_rook_queenside.move_to!(7,6)
+
+     expect(white_rook_queenside.can_castle?(7,7)).to eq false
+    end
+
+    it "should return true if castling move is NOT obstructed" do
+     white_king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', move: false)
+     white_rook_queenside = FactoryBot.create(:rook, coordinate_x: 7, coordinate_y: 7, piece_color: 'white', move: false)
+
+     expect(white_rook_queenside.can_castle?(7,7)).to eq true
+    end
+
+  end
+
+  
+
+
+
 end
 
 
