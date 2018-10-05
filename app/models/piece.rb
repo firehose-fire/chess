@@ -8,7 +8,7 @@ class Piece < ApplicationRecord
       if(target_move.piece_color == piece_color)
         raise RuntimeError
       else
-        target_move.update_attributes(coordinate_x: new_x, coordinate_y: new_y, captured: true)
+        target_move.update_attributes(coordinate_x: nil, coordinate_y: nil, captured: true)
       end
     end
 
