@@ -7,8 +7,8 @@ class PiecesController < ApplicationController
 
   def update
     @selected_piece = Piece.find(params[:id])
-    @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
     @game = @selected_piece.game
+    @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
     redirect_to game_path(@game)
   end
 

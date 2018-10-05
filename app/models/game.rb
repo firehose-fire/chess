@@ -49,8 +49,8 @@ class Game < ApplicationRecord
 
     # Queen creation for white and black player
 
-    Queen.create(coordinate_x: 3, coordinate_y: 7, piece_color: 'black', user_id: self.user_black_id, game_id: self.id)
-    Queen.create(coordinate_x: 3, coordinate_y: 0, piece_color: 'white', user_id: self.user_white_id, game_id: self.id)
+    Queen.create(coordinate_x: 3, coordinate_y: 0, piece_color: 'black', user_id: self.user_black_id, game_id: self.id)
+    Queen.create(coordinate_x: 3, coordinate_y: 7, piece_color: 'white', user_id: self.user_white_id, game_id: self.id)
 
   end
 
