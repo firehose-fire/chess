@@ -23,6 +23,7 @@ class Piece < ApplicationRecord
     return false if valid_move?(new_x, new_y) == false
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
+
   end
 
   def is_occupied?(x, y)
