@@ -9,7 +9,6 @@ class PiecesController < ApplicationController
     @selected_piece = Piece.find(params[:id])
     @game = @selected_piece.game
     @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
-    redirect_to game_path(@game)
   end
 
 
