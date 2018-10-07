@@ -30,8 +30,8 @@ RSpec.describe Game, type: :model do
     expect(game.piece_at(1, 7)).to have_attributes(type: 'Knight', piece_color: 'white')
 
     # Queen test for black and white pieces
-    expect(game.piece_at(3, 7)).to have_attributes(type: 'Queen', piece_color: 'black')
-    expect(game.piece_at(3, 0)).to have_attributes(type: 'Queen', piece_color: 'white')
+    expect(game.piece_at(3, 0)).to have_attributes(type: 'Queen', piece_color: 'black')
+    expect(game.piece_at(3, 7)).to have_attributes(type: 'Queen', piece_color: 'white')
 
   end
 
@@ -44,7 +44,7 @@ RSpec.describe Game, type: :model do
 
       game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id)
       king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
-      piece = FactoryBot.create(:piece, coordinate_x: 3, coordinate_y: 2,piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+      piece = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 4, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
 
       piece.move_to!(4,3)
 
