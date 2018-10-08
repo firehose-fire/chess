@@ -43,4 +43,5 @@ class Pawn < Piece
     return false if is_obstructed?(x, y) && !check_diaganol(x, y)
     move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
   end
+
 end
