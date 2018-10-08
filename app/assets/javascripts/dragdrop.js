@@ -17,7 +17,7 @@ $( function() {
           dataType: "script",
           data: { 'piece': {'coordinate_x': $row, 'coordinate_y': $column }}, 
           success: function(){
-            if ($piece_type == 'Pawn' && $column == 7){
+            if (($piece_type == 'Pawn' && $column == 7) || ($piece_type == 'Pawn' && $column == 0)){
               $('#promotion').modal('show')
             }
           }
@@ -25,6 +25,7 @@ $( function() {
       }
     });
   });
+
 
 
 
