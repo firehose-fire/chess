@@ -21,6 +21,7 @@ module GamesHelper
   def link_to_piece(piece)
     @piece_id = piece.id if piece 
     @piece_type = piece.type if piece
+    @piece_color = piece.piece_color if piece
   end
 
 end
