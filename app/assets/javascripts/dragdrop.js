@@ -22,8 +22,9 @@ $( function() {
           success: function(){
             // if (($piece_type == 'Pawn' && $column == 7 && $piece_color == 'black') || ($piece_type == 'Pawn' && $column == 0 && $piece_color == 'white')){
               $('#promotion').modal('show')
+              // window.location.reload()
             }
-            // window.location.reload()
+             
           // }
         })      
       }
