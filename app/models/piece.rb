@@ -170,120 +170,21 @@ class Piece < ApplicationRecord
 
   end
 
-  def white_rook_queenside
-    white_rook_queenside = Piece.where(type: "Rook", game_id: game_id, coordinate_x: 0, coordinate_y: 7, move: false)
-    white_rook_queenside.present?
-  end
+ 
 
-  def white_rook_kingside
-    white_rook_queenside = Piece.where(type: "Rook", game_id: game_id, coordinate_x: 7, coordinate_y: 7, move: false)
-    white_rook_kingside.present?
-  end
-
-  def white_king
+  def white_king_has_not_moved?
     white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false)
     white_king.present? 
   end
 
-  def black_rook_queenside
-    white_rook_queenside = Piece.where(type: "Rook", game_id: game_id, coordinate_x: 0, coordinate_y: 0, move: false)
-    white_rook_queenside.present?
+
+  def black_king_has_not_moved?
+    black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, move: false)
+    black_king.present? 
   end
 
-  def black_rook_kingside
-    white_rook_queenside = Piece.where(type: "Rook", game_id: game_id, coordinate_x: 7, coordinate_y: 0, move: false)
-    white_rook_kingside.present?
-  end
 
-  def black_king
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, move: false)
-    white_king.present? 
-  end
 
- 
-    
-  # castle queenside white
-  def can_castle_queenside_white?(rook_x, rook_y)
-    if white_king == true && is_obstructed?(rook_x, rook_y) == false
-      castle!(rook_x, rook_y)
-    end
-  end
-  # castle kingside white
-  def can_castle_kingside_white?(rook_x, rook_y)
-    if white_king == true && is_obstructed?(rook_x, rook_y) == false
-      castle!(rook_x, rook_y)
-    end
-  end
-    
-  # castle queenside black
-  def can_castle_queenside_black?(rook_x, rook_y)
-    if black_king == true && is_obstructed?(rook_x, rook_y) == false
-      castle!(rook_x, rook_y)
-    end
-  end
-
-  # castle kingside black
-  def can_castle_kingside_black?(rook_x, rook_y)
-    if black_king == true && is_obstructed?(rook_x, rook_y) == false
-      castle!(rook_x, rook_y)
-    end
-  end
   
-
-  def can_castle?(rook_x, rook_y) 
-
-    if white_rook_queenside == true
-      can_castle_queenside_white(rook_x, rook_y)
-
-    elsif white_rook_kingside == true
-      can_castle_kingside_white(rook_x, rook_y)
-
-    elsif black_rook_queenside == true
-      can_castle_queenside_black(rook_x, rook_y)
-
-    elsif black_rook_kingside == true
-      can_castle_kingside_black(rook_x, rook_y)
-
-    end
-
-    return false
-
-  end
-    
-  def castle_queenside_white!(rook_x, rook_y)
-    # move rook queenside
-    rook_queenside_white = Piece.where(type: "Rook", coordinate_x: rook_x, coordinate_y: rook_y, game_id: game_id).first
-    rook_queenside_white.update_attributes(coordinate_x: 2, coordinate_y: 7)
-    # move king
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-    white_king.update_attributes(coordinate_x: 1, coordinate_y: 7)
-  end
-        
-  def castle_kingside_white!(rook_x, rook_y)
-    # move rook queenside
-    rook_queenside_white = Piece.where(type: "Rook", coordinate_x: rook_x, coordinate_y: rook_y, game_id: game_id).first
-    rook_queenside_white.update_attributes(coordinate_x: 5, coordinate_y: 7)
-    # move king
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-    white_king.update_attributes(coordinate_x: 6, coordinate_y: 7)
-  end
-        
-  def castle_queenside_black!(rook_x, rook_y)
-    # move rook queenside
-    rook_queenside_black = Piece.where(type: "Rook", coordinate_x: rook_x, coordinate_y: rook_y, game_id: game_id).first
-    rook_queenside_black.update_attributes(coordinate_x: 0, coordinate_y: 2)
-    # move king
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-    white_king.update_attributes(coordinate_x: 0, coordinate_y: 1)
-  end
-
-  def castle_kingside_black!(rook_x, rook_y)
-    # move rook queenside
-    rook_queenside_black = Piece.where(type: "Rook", coordinate_x: rook_x, coordinate_y: rook_y, game_id: game_id).first
-    rook_queenside_black.update_attributes(coordinate_x: 0, coordinate_y: 5)
-    # move king
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-    white_king.update_attributes(coordinate_x: 0, coordinate_y: 6)
-  end
 
 end
