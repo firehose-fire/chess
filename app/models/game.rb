@@ -14,7 +14,11 @@ class Game < ApplicationRecord
   end
   
   def toggle_turn
-    update_attributes(turn: !turn)
+    next_turn = !turn
+    if update_attributes(turn: next_turn)
+      return next_turn
+    end
+      nil
   end
   
   def populate_the_game 
