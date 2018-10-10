@@ -56,28 +56,52 @@ class Game < ApplicationRecord
 
   def is_check?(user)
     if user == user_black
-      king = pieces.where(type: "King", user_id: user_black).first
-      king_x = king.coordinate_x
-      king_y = king.coordinate_y
+      @king = pieces.where(type: "King", user_id: user_black).first 
+      @king_x = @king.coordinate_x
+      @king_y = @king.coordinate_y
       user_white.pieces.where(game: self.id).each do |piece|
         if piece.type != "King"
-          return true if piece.is_capture_valid?(king_x,king_y) && piece.is_occupied?(king_x,king_y)
+          return true if piece.is_capture_valid?(@king_x,@king_y) && piece.is_occupied?(@king_x,@king_y)
         end
         return false
       end
     end
 
     if user == user_white
-    king = pieces.where(type: "King", user_id: user_white).first
-    king_x = king.coordinate_x
-    king_y = king.coordinate_y
-    user_white.pieces.where(game: self.id).each do |piece|
+    @king = pieces.where(type: "King", user_id: user_white).first
+    @king_x = @king.coordinate_x
+    @king_y = @king.coordinate_y
+    user_black.pieces.where(game: self.id).each do |piece|
       if piece.type != "King"
-        return true if piece.is_capture_valid?(king_x,king_y) && piece.is_occupied?(king_x,king_y)
+        return true if piece.is_capture_valid?(@king_x,@king_y) && piece.is_occupied?(@king_x,@king_y)
       end
       return false
       end
     end
+  end
+
+  
+  def checkmate?(user)
+    # puts"#{self.inspect}"
+    # puts "#{user.inspect}"
+   
+  
+    if is_check?(user)
+        puts "#{@king.inspect}"
+        move_out = @king.move_to!(@king_x + 1, @king_y)
+        if move_out
+          puts "____________"
+          puts "#{@king.inspect}"
+          puts "checkmate"
+          true
+        end
+
+      
+    else  
+      puts "no way bozo!"
+      false
+   end
+
   end
   
   
