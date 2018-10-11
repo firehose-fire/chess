@@ -7,8 +7,6 @@ RSpec.describe Pawn, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  
-
   def create_black_pawn(x:, y:, user_id:)
     pawn_black = FactoryBot.build(:pawn, piece_color: 'black', coordinate_x: x, coordinate_y: y, user_id: @user, game: @game)
     pawn_black
@@ -19,7 +17,7 @@ RSpec.describe Pawn, type: :model do
     pawn_white
   end
 
-  xdescribe 'move_one_space?' do
+  describe 'move_one_space?' do
     it 'return true if the white pawn can move one space' do
       white_pawn = create_white_pawn(x: 6, y: 6, user_id: 4)
       expect(white_pawn.move_one_space?(6, 5)).to eq(true)
@@ -36,7 +34,7 @@ RSpec.describe Pawn, type: :model do
     end
   end
 
-  xdescribe 'move_two_spaces?' do
+  describe 'move_two_spaces?' do
     it 'return true if the pawn moves 2 spaces' do
       black_pawn = create_black_pawn(x: 0, y: 1, user_id: 5)
       expect(black_pawn.move_two_spaces?(0, 3)).to eq(true)
@@ -67,7 +65,7 @@ RSpec.describe Pawn, type: :model do
 
   describe 'capture_diagonal?' do
     it 'return true if can capture a diagonal if capture down and to left' do
-      byebug
+      @game = FactoryBot.build(:game)
       white_pawn = create_white_pawn(x: 6, y: 6, user_id: 4)
       black_pawn = create_black_pawn(x: 5, y: 4, user_id: 5)
       black_pawn.move_to!(5, 5)
@@ -75,54 +73,66 @@ RSpec.describe Pawn, type: :model do
     end
 
     it 'return true if can capture a diagonal down and to right' do
+      @game = FactoryBot.build(:game)
       white_pawn = create_white_pawn(x: 6, y: 6, user_id: 4)
       black_pawn = create_black_pawn(x: 7, y: 4, user_id: 5)
       black_pawn.move_to!(7, 5)
       expect(white_pawn.move_to!(7, 5)).to eq(true)
     end
 
-    # it 'return false if can capture diagonal up and to right' do
-    #   white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
-    #   black_pawn = create_black_pawn(x: 3, y: 3, user_id: 5)
-    #   expect(black_pawn.move_to!(4, 4)).to eq(false)
-    # end
+    it 'return false if can capture diagonal up and to right' do
+      @game = FactoryBot.build(:game)
+      white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
+      black_pawn = create_black_pawn(x: 3, y: 3, user_id: 5)
+      expect(black_pawn.move_to!(4, 4)).to eq(false)
+    end
 
-    # it 'return false if can capture a diagonal up and to left' do
-    #   white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
-    #   black_pawn = create_black_pawn(x: 5, y: 3, user_id: 5)
-    #   expect(black_pawn.move_to!(4, 4)).to eq(false)
-    # end
+    it 'return false if can capture a diagonal up and to left' do
+      @game = FactoryBot.build(:game)
+      white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
+      black_pawn = create_black_pawn(x: 5, y: 3, user_id: 5)
+      expect(black_pawn.move_to!(4, 4)).to eq(false)
+    end
   end 
 
   describe 'valid_move?' do
-    # it 'return true for 2 space move with no obstruction from starting point' do
-    #   pawn_black = create_black_pawn(x: 5, y: 1, user_id: 4)
-    #   expect(pawn_black.move_to!(5, 3)).to eq(true)
-    # end
+    it 'return true for 2 space move with no obstruction from starting point' do
+      @game = FactoryBot.build(:game)
+      pawn_black = create_black_pawn(x: 5, y: 1, user_id: 4)
+      expect(pawn_black.move_to!(5, 3)).to eq(false)
+    end
 
-    # it 'return true for 2 space move with no obstruction from starting point' do
-    #   pawn_black = create_black_pawn(x: 5, y: 1, user_id: 4)
-    #   expect(pawn_black.move_to!(5, 3)).to eq(true)
-    # end
-                          
+    it 'return true for 2 space move with no obstruction from starting point' do
+      @game = FactoryBot.build(:game)
+      pawn_white = create_white_pawn(x: 5, y: 6, user_id: 4)
+      pawn_black = create_black_pawn(x: 5, y: 1, user_id: 5)
+      pawn_black.move_to!(5, 2)
+      expect(pawn_white.move_to!(5, 4)).to eq(true)
+    end
+
     it 'return true for 1 space move with no obstruction' do
+      @game = FactoryBot.build(:game)
       white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
       black_pawn = create_black_pawn(x: 1, y: 1, user_id: 5)
       black_pawn.move_to!(1, 2)
       expect(white_pawn.move_to!(4, 3)).to eq(true)
     end
 
-    # it 'return false for 2 space move with obstruction' do
-    #   white_pawn = create_white_pawn(x: 4, y: 6, user_id: 4)
-    #   black_pawn = create_black_pawn(x: 4, y: 5, user_id: 5)
-    #   expect(white_pawn.move_to!(4, 4)).to eq(false)
-    # end
+    it 'return false for 2 space move with obstruction' do
+      @game = FactoryBot.build(:game)
+      white_pawn = create_white_pawn(x: 4, y: 6, user_id: 4)
+      black_pawn = create_black_pawn(x: 3, y: 5, user_id: 5)
+      black_pawn.move_to!(4, 5)
+      expect(white_pawn.move_to!(4, 4)).to eq(false)
+    end
 
-    # it 'return false for 1 space move with obstruction' do
-    #   white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
-    #   black_pawn = create_black_pawn(x: 4, y: 3, user_id: 5)
-    #   expect(white_pawn.move_to!(4, 3)).to eq(false)
-    # end
+    it 'return false for 1 space move with obstruction' do
+      @game = FactoryBot.build(:game)
+      white_pawn = create_white_pawn(x: 4, y: 4, user_id: 4)
+      black_pawn = create_black_pawn(x: 3, y: 3, user_id: 5)
+      black_pawn.move_to!(4, 3)
+      expect(white_pawn.move_to!(4, 3)).to eq(false)
+    end
   end
 
   describe 'en_passant' do
