@@ -44,4 +44,8 @@ class Pawn < Piece
     move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
   end
 
+  # def is_promotion?(y)
+  #   y = 0 && type = 'Pawn' || y = 7 && type = 'Pawn' 
+  # end
+
 end
