@@ -13,9 +13,11 @@ FactoryBot.define do
   factory :rook do
     
   end
+
   factory :bishop do
     
   end
+
   factory :knight do
     
   end
