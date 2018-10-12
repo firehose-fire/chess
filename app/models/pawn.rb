@@ -39,6 +39,7 @@ class Pawn < Piece
 
   
   def valid_move?(x, y)
+    return false if horizontal_move?(x)
     return false if is_occupied?(x, y) && !check_diaganol(x, y)
     return false if is_obstructed?(x, y) && !check_diaganol(x, y)
     move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
