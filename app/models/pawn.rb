@@ -39,13 +39,14 @@ class Pawn < Piece
 
   
   def valid_move?(x, y)
+    return false if horizontal_move?(x)
     return false if is_occupied?(x, y) && !check_diaganol(x, y)
     return false if is_obstructed?(x, y) && !check_diaganol(x, y)
     move_one_space?(x, y) || move_two_spaces?(x, y) || capture_diagonal?(x, y)
   end
 
-  # def is_promotion?(y)
-  #   y = 0 && type = 'Pawn' || y = 7 && type = 'Pawn' 
-  # end
+  def is_promotion?(y)
+     y.include[0, 7] ? true : false
+  end
 
 end
