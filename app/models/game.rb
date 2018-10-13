@@ -2,12 +2,13 @@
 class Game < ApplicationRecord
   belongs_to :user_white, class_name: 'User', optional: true
   belongs_to :user_black, class_name: 'User', optional: true
-
   has_many :pieces
 
   after_create :populate_the_game
   
   scope :available, -> { where(user_white_id: nil) }
+
+  attr_accessor(:king, :king_x, :king_y)
 
   def piece_at(x, y)
     pieces.where(coordinate_x: x, coordinate_y: y).first
@@ -58,6 +59,7 @@ class Game < ApplicationRecord
     if user == user_black
       @king = pieces.where(type: "King", user_id: user_black).first 
       @king_x = @king.coordinate_x
+
       @king_y = @king.coordinate_y
       user_white.pieces.where(game: self.id).each do |piece|
         if piece.type != "King"
@@ -82,24 +84,43 @@ class Game < ApplicationRecord
 
   
   def checkmate?(user)
-    # puts"#{self.inspect}"
-    # puts "#{user.inspect}"
-   
-  
+
     if is_check?(user)
-        puts "#{@king.inspect}"
-        move_out = @king.move_to!(@king_x + 1, @king_y)
-        if move_out
-          puts "____________"
-          puts "#{@king.inspect}"
-          puts "checkmate"
-          true
+    
+    #check surrounding spaces to see if king can move to avoid checkmate    
+
+      king_moves =[  [@king_x+1, @king_y+1],
+      [@king_x+1, @king_y],
+      [@king_x+1, @king_y-1],
+      [@king_x, @king_y+1],
+      [@king_x, @king_y-1],
+      [@king_x-1, @king_y+1],
+      [@king_x-1, @king_y],
+      [@king_x-1, @king_y-1]
+      ]   
+            
+      king_moves.each do |move|
+         #is move in bounds?
+        if king.boundaries(move[0], move[1]) == true
+          #is space empty?
+          if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil
+            puts "---->#{move.inspect}"   
+            return false            
+          end
+
         end
+
+      end
+      puts "checkmate!"
+      return true
+
+        
+        
 
       
     else  
       puts "no way bozo!"
-      false
+      return false
    end
 
   end

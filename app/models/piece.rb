@@ -20,9 +20,17 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(new_x, new_y)
+    return false if boundaries(new_x,new_y) == false    
     return false if valid_move?(new_x, new_y) == false
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
+  end
+
+  # check move is within board boundaries
+  def boundaries(x, y)
+    return false if x > 7 || x < 0 || y > 7 || y < 0
+    return true
+
   end
 
   def is_occupied?(x, y)
@@ -145,7 +153,7 @@ class Piece < ApplicationRecord
     y_position_change = (y_target - coordinate_y).abs
 
     # is the path valid
-   if x_target > 7 || x_target < 0 || y_target > 7 || y_target < 0
+   if boundaries(x_target,y_target) == false
     raise 'Outside of bounds of game'
    end
 

@@ -35,66 +35,90 @@ RSpec.describe Game, type: :model do
 
   end
 
-  describe "is check for the king" do
+  # describe "is check for the king" do
 
 
-    it "should see if the color black king is in a check position and return true" do
-      user_black = FactoryBot.create(:user)
-      user_white = FactoryBot.create(:user)
+  #   it "should see if the color black king is in a check position and return true" do
+  #     user_black = FactoryBot.create(:user)
+  #     user_white = FactoryBot.create(:user)
 
-      game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id, )
-      king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
-      piece = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 4, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+  #     game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id, )
+  #     king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
+  #     piece = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 4, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
 
-      # piece.move_to!(4,3)
+  #     # piece.move_to!(4,3)
 
-      expect(game.is_check?(game.user_black)).to eq true
-
-
-    end
-
-    it "should see if the color white king is in a check position and return true" do
-      user_black = FactoryBot.build(:user)
-      user_white = FactoryBot.build(:user)
-
-      game = FactoryBot.build(:game, user_white_id: user_white.id, user_black_id: user_black.id)
-      king = FactoryBot.build(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'white', user_id: user_black.id, game_id: game.id)
-      piece = FactoryBot.build(:pawn, coordinate_x: 3, coordinate_y: 6, piece_color: 'black',  user_id: user_white.id, game_id: game.id)
-
-      # piece.move_to!(4,7)
-
-      expect(game.is_check?(game.user_white)).to eq true
+  #     expect(game.is_check?(game.user_black)).to eq true
 
 
-    end
-  end
+  #   end
+
+  #   it "should see if the color white king is in a check position and return true" do
+  #     user_black = FactoryBot.build(:user)
+  #     user_white = FactoryBot.build(:user)
+
+  #     game = FactoryBot.build(:game, user_white_id: user_white.id, user_black_id: user_black.id)
+  #     king = FactoryBot.build(:king, coordinate_x: 4, coordinate_y: 7, piece_color: 'black', user_id: user_black.id, game_id: game.id)
+  #     piece = FactoryBot.build(:pawn, coordinate_x: 3, coordinate_y: 6, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+
+  #     # piece.move_to!(4,7)
+
+  #     expect(game.is_check?(game.user_white)).to eq true
+
+
+  #   end
+  # end
 
   describe "game is in state of checkmate" do
-    before(:all) do 
-      
+    before(:each) do 
+      # pawn0 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 0, coordinate_y: 1).first
+      # pawn1 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 1, coordinate_y: 1).first
+      # pawn2 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 2, coordinate_y: 1).first
+      # pawn3 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 3, coordinate_y: 1).first
+      # pawn4 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 4, coordinate_y: 1).first
+      # pawn5 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 5, coordinate_y: 1).first
+      # pawn6 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 6, coordinate_y: 1).first
+      # pawn7 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 7, coordinate_y: 1).first
+      # king = game.pieces.where(user_id: user_black.id, type: 'King').first
+      # queen = game.pieces.where(user_id: user_black.id, type: 'Queen').first
+      # bishop = game.pieces.where(user_id: user_black.id, type: 'Bishop').first
+      # knight = game.pieces.where(user_id: user_black.id, type: 'Knight').first
+      # knight2 = game.pieces.where(user_id: user_black.id, type: 'Knight', id: !knight.id)
+      # rook = game.pieces.where(user_id: user_black.id, type: 'Rook').first
+      # rook2 = game.pieces.where(user_id: user_black.id, type: 'Rook')
       
     end
 
 
-    it "should verify if king is in check and cannot make a move to get out of check" do
-     # # check_piece = FactoryBot.build(:rook, coordinate_x: 3, coordinate_y: 4, game_id: game.id, user_id: user_black.id, piece_color: 'black')
-      # king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 3, piece_color: 'black', user_id: user_black.id, game_id: game.id)
-      # piece = FactoryBot.build(:pawn, coordinate_x: 3, coordinate_y: 4, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
-
+    it "should verify if king is in check and can make a move to get out of check and return false" do
+    
       user_black = FactoryBot.create(:user)
       user_white = FactoryBot.create(:user)
-
       game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id, id: 99 )
-      king = FactoryBot.create(:king, coordinate_x: 4, coordinate_y: 0, piece_color: 'black', user_id: user_black.id, game_id: game.id)
-      rook = FactoryBot.create(:rook, coordinate_x: 4, coordinate_y: 5, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
-      # pawn = FactoryBot.create(:pawn, coordinate_x: 5, coordinate_y: 1, game_id: game.id, user_id: user_black.id, piece_color: 'black')      
-      # bishop = FactoryBot.build(:bishop, coordinate_x: 2, coordinate_y: 0, game_id: game.id, user_id: user_black.id, piece_color: 'black')      
-      # pawn = FactoryBot.build(:pawn, coordinate_x: 2, coordinate_y: 1, game_id: game.id, user_id: user_black.id, piece_color: 'black')      
-      # pawn = FactoryBot.build(:pawn, coordinate_x: 4, coordinate_y: 1, game_id: game.id, user_id: user_white.id, piece_color: 'white')      
-     
+ 
+      knight = FactoryBot.create(:knight, coordinate_x: 5, coordinate_y: 2, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+      
+      pawn4 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 4, coordinate_y: 1).first
 
+    
+      pawn4.move_to!(4, 2)      
 
-      # expect(game.is_check?(game.user_black)).to eq true
+      expect(game.checkmate?(game.user_black)).to eq false
+    end
+
+    it "should verify if king is in check and cannot make a move to get out of check and return true" do
+    
+      user_black = FactoryBot.build(:user)
+      user_white = FactoryBot.build(:user)
+      game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id, id: 99 )
+ 
+      knight = FactoryBot.create(:knight, coordinate_x: 5, coordinate_y: 2, piece_color: 'white',  user_id: user_white.id, game_id: game.id)
+      
+      pawn4 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 4, coordinate_y: 1).first
+
+    
+      # pawn4.move_to!(4, 2)      
+
       expect(game.checkmate?(game.user_black)).to eq true
     end
 
