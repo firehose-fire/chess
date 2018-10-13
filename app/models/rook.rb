@@ -10,18 +10,7 @@ class Rook < Piece
 
   end
  
-
-  def castle!
-    if can_castle_kingside?
-      castle_kingside!
-    elsif can_castle_queenside?
-      castle_queenside!
-    else
-      raise "Error, invalid castling." 
-    end 
-  end
     
-  # castle
   def can_castle?
     if self.color == "white"
       white_king = Piece.where(type: "King", game_id: game_id, color: "white")
@@ -43,10 +32,10 @@ class Rook < Piece
         white_king.update_attributes(coordinate_x: 1, coordinate_y: 7)
       else
         # move rook queenside
-        self.update_attributes(coordinate_x: 0, coordinate_y: 2)
+        self.update_attributes(coordinate_x: 2, coordinate_y: 0)
         # move king
-        white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-        white_king.update_attributes(coordinate_x: 0, coordinate_y: 1)
+        black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, move: false).first
+        black_king.update_attributes(coordinate_x: 1, coordinate_y: 0)
       end
     end
   end
@@ -61,10 +50,10 @@ class Rook < Piece
         white_king.update_attributes(coordinate_x: 6, coordinate_y: 7)
       else
         # move rook queenside
-        self.update_attributes(coordinate_x: 0, coordinate_y: 5)
+        self.update_attributes(coordinate_x: 5, coordinate_y: 0)
         # move king
-        white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false).first
-        white_king.update_attributes(coordinate_x: 0, coordinate_y: 6)
+        black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, move: false).first
+        black_king.update_attributes(coordinate_x: 6, coordinate_y: 0)
       end
     end
   end
