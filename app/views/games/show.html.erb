@@ -1,21 +1,4 @@
-<table>
-  <% (0..7).reverse_each do |column| %>
-    <tr> 
-      <% (0..7).each do |row| %>
-
-        <% class_highlight = piece_in_row_and_column?(@selected_piece, row, column) ? 'highlighted' : "" %>
-        <td class="<%= class_highlight %>" data-column=<%= column %> data-row=<%= row %>> <!-- this gives a col and row to table cells-->
-          
-          
-          
-        <%= link_to_piece get_piece_at_click(@game.pieces, row, column) %>
-
-        </td>
-
-      <% end  %>
-    </tr>
-  <% end %> 
-</table>
+<%= render partial: "games/board" %>
 
 <%= link_to "Forfeit", @games,  :method => :delete, data: { confirm: 'Are you sure you want to forfeit?'}, class: 'btn btn-secondary btn-lg'%>
 
