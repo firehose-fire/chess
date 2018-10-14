@@ -1,0 +1,17 @@
+
+<table id="board" >
+  <% (0..7).reverse_each do |column| %>
+    <tr> 
+      <% (0..7).each do |row| %>
+      <!-- this gives a col and row to table cells-->
+        <td class="class_highlight droppable" data-column="<%= column %> " data-row="<%= row %>" > 
+        <% if link_to_piece get_piece(@game.pieces, row, column)  %>
+          <div id='<%= @piece_id %>' class="pieces" >
+            <%= @piece_type %>            
+          </div >
+        <% end %>
+        </td>
+      <% end  %>
+    </tr>
+  <% end %> 
+</table>

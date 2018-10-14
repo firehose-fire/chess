@@ -11,26 +11,23 @@ RSpec.describe Piece, type: :model do
   
     describe "move_to!(new_x, new_y)" do
     it "should give a runtime error can't capture your own piece" do
-      located_piece = FactoryBot.create(:piece,
+      located_piece = FactoryBot.create(:pawn,
                         coordinate_x: 3,
                         coordinate_y: 1,
                         piece_color: 'black', user_id: 1)
-      piece = FactoryBot.create(:piece,
-                                coordinate_x: 3,
+      piece = FactoryBot.create(:pawn,
+                                coordinate_x: 2,
                                 coordinate_y: 0,
                                 piece_color: 'black', user_id: 1)
       expect{piece.move_to!(3,1)}.to raise_error(RuntimeError)
     end
        it "should move and update the position" do
-      piece = FactoryBot.create(:piece,
-                                coordinate_x: 3,
-                                coordinate_y: 0,
-                                piece_color: 'black', 
-                                user_id: 1,
-                                move: false)
-      piece.move_to!(6,3)
-      expect([piece.coordinate_x,piece.coordinate_y]).to eq([6,3])
-      expect(piece.move).to eq(true)
+      piece = FactoryBot.create(:pawn,
+                                coordinate_x: 2,
+                                coordinate_y: 1,
+                                piece_color: 'black', user_id: 1)
+      piece.move_to!(2,2)
+      expect([piece.coordinate_x,piece.coordinate_y]).to eq([2,2])
     end
   end
   
