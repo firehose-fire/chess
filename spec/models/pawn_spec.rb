@@ -128,8 +128,11 @@ RSpec.describe Pawn, type: :model do
 
   describe 'en_passant' do
     it 'should update piece state to en passant for the first move' do
-      white_pawn = create_white_pawn(x: 2, y: 2, user_id: 4, game_id: 1)
+      white_pawn = create_white_pawn(x: 2, y: 2)
+      black_pawn = create_black_pawn(x: 3, y: 1)
+      black_pawn.move_to!(3, 2)
       white_pawn.move_to!(2,4)
+      
 
       expect(white_pawn.en_passant).to eq(true)
 
