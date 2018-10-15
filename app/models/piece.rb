@@ -175,7 +175,9 @@ class Piece < ApplicationRecord
       check_diaganol(x_target, y_target) 
 
     else
-      raise "Error Invalid move"
+      puts "Error: Invalid Move"
+      return false
+      # raise "Error Invalid move"
     end
 
   end

@@ -56,68 +56,77 @@ class Game < ApplicationRecord
   end
 
   def is_check?(user)
+    @check_piece = nil
     if user == user_black
       @king = pieces.where(type: "King", user_id: user_black).first 
       @king_x = @king.coordinate_x
-
       @king_y = @king.coordinate_y
-      user_white.pieces.where(game: self.id).each do |piece|
-        if piece.type != "King"
-          return true if piece.is_capture_valid?(@king_x,@king_y) && piece.is_occupied?(@king_x,@king_y)
-        end
-        return false
+      user_white.pieces.where(game: self.id).each do |piece|      
+        return true if is_valid_capture_occupied?(piece) == true
       end
+      return false
     end
 
     if user == user_white
     @king = pieces.where(type: "King", user_id: user_white).first
     @king_x = @king.coordinate_x
     @king_y = @king.coordinate_y
-    user_black.pieces.where(game: self.id).each do |piece|
-      if piece.type != "King"
-        return true if piece.is_capture_valid?(@king_x,@king_y) && piece.is_occupied?(@king_x,@king_y)
+    
+      user_black.pieces.where(game: self.id).each do |piece|
+        return true if is_valid_capture_occupied?(piece) == true
       end
-      return false
-      end
+      
+    return false
     end
+  end
+
+
+  def is_valid_capture_occupied?(piece)
+    # puts "____#{piece.inspect}"
+     if piece.type != "King"
+          
+          if piece.valid_move?(@king_x,@king_y) == true
+            
+            if piece.is_capture_valid?(@king_x,@king_y) && piece.is_occupied?(@king_x,@king_y)
+              @check_piece = piece
+              puts "Check piece is#{@check_piece.inspect}"
+              return true
+            end
+
+          end  
+        
+        end
   end
 
   
   def checkmate?(user)
-
-    if is_check?(user)
+    @user = user
+    if is_check?(@user) == true
     
-    #check surrounding spaces to see if king can move to avoid checkmate    
-
-      king_moves =[  [@king_x+1, @king_y+1],
-      [@king_x+1, @king_y],
-      [@king_x+1, @king_y-1],
-      [@king_x, @king_y+1],
-      [@king_x, @king_y-1],
-      [@king_x-1, @king_y+1],
-      [@king_x-1, @king_y],
-      [@king_x-1, @king_y-1]
+      king_moves = [  
+        [@king_x+1, @king_y+1],
+        [@king_x+1, @king_y],
+        [@king_x+1, @king_y-1],
+        [@king_x, @king_y+1],
+        [@king_x, @king_y-1],
+        [@king_x-1, @king_y+1],
+        [@king_x-1, @king_y],
+        [@king_x-1, @king_y-1]
       ]   
-            
+
+      #check surrounding spaces to see if king can move to avoid checkmate      
       king_moves.each do |move|
          #is move in bounds?
         if king.boundaries(move[0], move[1]) == true
           #is space empty?
-          if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil
-            puts "---->#{move.inspect}"   
-            return false            
+          if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil 
+              puts "><><#{@check_piece.inspect}"
+            return false 
           end
-
         end
-
       end
       puts "checkmate!"
       return true
-
-        
-        
-
-      
     else  
       puts "no way bozo!"
       return false
