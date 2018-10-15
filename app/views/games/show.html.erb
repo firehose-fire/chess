@@ -1,3 +1,5 @@
 <%= render partial: "games/board" %>
 
 <%= link_to "Forfeit", @games,  :method => :delete, data: { confirm: 'Are you sure you want to forfeit?'}, class: 'btn btn-secondary btn-lg'%>
+<%= link_to "Castle Queenside", @pieces, :method => :show, data: { confirm: 'Are you sure you want to Castle Queenside?'}, class: 'btn btn-secondary btn-lg'%>
+<%= link_to "Castle Kingside", @pieces, :method => :show, data: { confirm: 'Are you sure you want to Castle Kingside?'}, class: 'btn btn-secondary btn-lg'%>

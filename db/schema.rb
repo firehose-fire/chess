@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20181005164101) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,15 +49,13 @@ ActiveRecord::Schema.define(version: 20181005164101) do
     t.integer  "coordinate_y"
     t.string   "piece_color"
     t.boolean  "captured"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "type"
     t.integer  "user_id"
     t.integer  "game_id"
-
-    t.boolean  "has_moved"
+    t.boolean  "has_moved",    default: false
     t.boolean  "en_passant"
-
   end
 
   create_table "queens", force: :cascade do |t|

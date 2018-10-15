@@ -173,13 +173,13 @@ class Piece < ApplicationRecord
  
 
   def white_king_has_not_moved?
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, move: false)
+    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, has_moved: false)
     white_king.present? 
   end
 
 
   def black_king_has_not_moved?
-    black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, move: false)
+    black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, has_moved: false)
     black_king.present? 
   end
 
