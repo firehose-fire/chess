@@ -62,7 +62,6 @@ class Game < ApplicationRecord
       @king_x = @king.coordinate_x
       @king_y = @king.coordinate_y
         user_white.pieces.where(game: self.id).each do |piece| 
-        # puts "#{piece.inspect}"   
           return true if is_valid_move_capture?(piece) == true
         end
       return false
@@ -81,27 +80,25 @@ class Game < ApplicationRecord
 
 
   def is_valid_move_capture?(piece)   
-    puts "____#{piece.inspect}"
-    puts "                     "
-     if piece.type != "King"
-          #checks if the move is valid
-              puts "trying to check move #{piece.inspect} to #{@king_x}, #{@king_y}"
-              puts "=====#{piece.valid_move?(@king_x,@king_y)}"
-               puts "                     "
-             if piece.valid_move?(@king_x,@king_y) == true && piece.is_capture_valid?(@king_x,@king_y) == true 
-                   puts "--<#{piece.inspect} is valid move and capture valid"
-              @check_piece = piece
-               # puts "Check piece____#{@check_piece.inspect}"
-              return true
-            # end
-          end  
-          return false
-        end
+   if piece.type != "King"
+        #checks if the move is valid
+      if piece.valid_move?(@king_x,@king_y) == true && piece.is_capture_valid?(@king_x,@king_y) == true                 
+        @check_piece = piece
+        return true
+      end  
+  
+      return false
+    end
+  end
+
+  def capture_check?(user)
+    user.pieces.where(game: self.id).each do |piece|
+      return true if valid_move? == true
+    end   
   end
 
   
   def checkmate?(user)
-    puts "#{user.inspect}"
     @user = user
     if is_check?(@user) == true
     
@@ -120,22 +117,22 @@ class Game < ApplicationRecord
       king_moves.each do |move|
          #is move in bounds?
         if king.boundaries(move[0], move[1]) == true
-          #if space is empty and check piece cannot
-         if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil 
-              if @check_piece.valid_move?(move[0],move[1]) == false
-            puts "The check piece #{@check_piece.type} can move where i want to go? #{@check_piece.valid_move?(move[0],move[1])}"
-            
-            # if @check_piece.valid_move?(move[0],move[1]) == false
-              puts "I can move my king to #{move[0]} #{move[1]}"
-              return false 
-            end
+          #is space empty?
+         if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil
+              #check piece cannot move to that space and capture king
+              if @check_piece.valid_move?(move[0],move[1]) == false          
+                return false 
+              #check own pieces to see if can capture or block
+              elsif @check_piece.valid_move?(move[0],move[1]) == true
+                  capture_check(@user)
 
+                
+              end   
           end
 
         end
 
       end
-      puts "><><#{@check_piece.inspect}"
       puts "checkmate!"
       return true
     
