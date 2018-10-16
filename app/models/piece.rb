@@ -113,16 +113,19 @@ class Piece < ApplicationRecord
       while x < x_target do 
         x = x + 1 
         y = y - 1
-        return true if is_occupied?(x, y)
+
+        return true if is_occupied?(x, y) == true
       end
     end
 
     #top to bottom and right to left
     if x > x_target and y > y_target
       while x > x_target do 
+        
         x = x - 1 
         y = y - 1
         return true if is_occupied?(x, y)
+        
       end
     end
 
@@ -175,8 +178,8 @@ class Piece < ApplicationRecord
       check_diaganol(x_target, y_target) 
 
     else    
-      puts "Error: Invalid Move #{self.piece_color} #{self.type} "
-      puts "#{self.inspect}"
+      puts "Error: Invalid Move #{self.piece_color} #{self.type} at #{self.coordinate_x}, #{self.coordinate_y} "
+      # puts "#{self.inspect}"
       return false
       # raise "Error Invalid move"
     end
