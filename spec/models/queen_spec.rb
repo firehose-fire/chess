@@ -6,7 +6,7 @@ RSpec.describe Queen, type: :model do
   user = FactoryBot.build(:user)
 
   queen = FactoryBot.create(:queen, game_id: 1, user_id: 4, coordinate_x: 3, coordinate_y: 0)
-  piece = FactoryBot.create(:piece, game_id: 1, user_id: 5, coordinate_x: 6, coordinate_y: 1)
+  piece = FactoryBot.create(:piece, game_id: 1, user_id: 5, coordinate_x: 6, coordinate_y: 0)
 
   describe "valid queen move?" do
     it "should check the horizontal move and return true" do
