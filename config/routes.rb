@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :games
   resources :pieces do
     collection do
-    get :update
+    get :update 
     end 
   end
+
+  get "/pieces/:rookid/castle_queen" => "pieces#castle_queen"
+  get "/pieces/:rookid/castle_king" => "pieces#castle_king"
 end

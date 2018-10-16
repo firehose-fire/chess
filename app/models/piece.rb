@@ -1,4 +1,6 @@
 class Piece < ApplicationRecord
+  attr_accessor :has_moved
+
   belongs_to :game, optional: true
   belongs_to :user, optional: true
   
@@ -168,23 +170,6 @@ class Piece < ApplicationRecord
       raise "Error Invalid move"
     end
 
-  end
-
- 
-
-  def white_king_has_not_moved?
-    white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, has_moved: false)
-    white_king.present? 
-  end
-
-
-  def black_king_has_not_moved?
-    black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, has_moved: false)
-    black_king.present? 
-  end
-
-
-
-  
+  end  
 
 end

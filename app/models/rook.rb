@@ -13,12 +13,17 @@ class Rook < Piece
     
   def can_castle?
     if self.piece_color == "white"
-      white_king = Piece.where(type: "King", game_id: game_id, piece_color: "white")
-      return white_king.has_moved == false && white_king.is_obstructed?(self.coordinate_x, self.coordinate_y) == false && self.has_moved == false
+  
+      white_king = Piece.where(type: "King", game_id: game_id, piece_color: "white").first
+      return white_king.has_moved != true && 
+      white_king.is_obstructed?(self.coordinate_x, self.coordinate_y) == false && 
+      self.has_moved != true
+    elsif self.piece_color == "black"
+      black_king = Piece.where(type: "King", game_id: game_id, piece_color: "black").first
+      return black_king.has_moved != true && black_king.is_obstructed?(self.coordinate_x, self.coordinate_y) == false && self.has_moved != true
     else
-      black_king = Piece.where(type: "King", game_id: game_id, piece_color: "black")
-      return black_king.has_moved == false && black_king.is_obstructed?(self.coordinate_x, self.coordinate_y) == false && self.has_moved == false
-    end  
+      return false
+    end
   end
 
     
@@ -57,7 +62,6 @@ class Rook < Piece
       end
     end
   end
-      
 
 
 end
