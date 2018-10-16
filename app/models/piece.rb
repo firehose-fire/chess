@@ -151,7 +151,6 @@ class Piece < ApplicationRecord
   def is_obstructed?(x_target, y_target)
     x_position_change = (x_target - coordinate_x).abs
     y_position_change = (y_target - coordinate_y).abs
-
     # is the path valid
    if boundaries(x_target,y_target) == false
     raise 'Outside of bounds of game'
@@ -174,8 +173,9 @@ class Piece < ApplicationRecord
 
       check_diaganol(x_target, y_target) 
 
-    else
-      puts "Error: Invalid Move"
+    else    
+      puts "Error: Invalid Move #{self.piece_color} #{self.type} "
+      puts "#{self.inspect}"
       return false
       # raise "Error Invalid move"
     end

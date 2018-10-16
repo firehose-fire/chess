@@ -4,25 +4,25 @@ RSpec.describe Bishop, type: :model do
    before(:all) do 
     game = FactoryBot.build(:game)
     user = FactoryBot.build(:user)
-    @bishop = FactoryBot.build(:bishop, coordinate_x: 2, coordinate_y: 0, game_id: game.id, user_id: user.id)      
+    @bishop = FactoryBot.build(:bishop, coordinate_x: 4, coordinate_y: 4, game_id: game.id, user_id: user.id)      
   end
    describe "valid_move?" do
     
     it "should return true if the bishop piece move is valid (diagonal up right)" do
-      expect(@bishop.valid_move?(5,3)).to eq(true)
+      expect(@bishop.valid_move?(5,5)).to eq(true)
     end
 
      it "should return true if the bishop piece move is valid (diagonal up left)" do
-      expect(@bishop.valid_move?(0,2)).to eq(true)
+      expect(@bishop.valid_move?(3,5)).to eq(true)
     end
 
     it "should return true if the bishop piece move is valid (diagonal down right)" do
-      expect(@bishop.valid_move?(4,2)).to eq(true)
+      expect(@bishop.valid_move?(5,3)).to eq(true)
     end
 
      it "should return true if the bishop piece move is valid (diagonal down left)" do
-      @bishop.move_to!(5,3)
-      expect(@bishop.valid_move?(4,2)).to eq(true)
+      # @bishop.move_to!(5,3)
+      expect(@bishop.valid_move?(3,3)).to eq(true)
     end
      
     it "should return true if the bishop piece move is valid (diagonal down right)" do
