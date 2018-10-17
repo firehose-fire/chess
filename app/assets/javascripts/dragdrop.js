@@ -2,8 +2,7 @@ var pieceId;
 var pieceType;
 var column;
 var row;
-
-$(document).ready(function() {
+var initPage = function() {
   $(".pieces").draggable({
     drag: function() {
       pieceId = $(this).data("piece_id");
@@ -21,20 +20,19 @@ $(document).ready(function() {
         type: "PUT",
         data: { piece: { coordinate_x: row, coordinate_y: column } },
         success: function() {
-          debugger;
-          // This where we want to move/replace the html element
           checkPromo();
+          initPage();
         },
-        error: function() {
-          debugger;
-          // This is where we want to error 400
-        }
+        error: function() {}
       });
     }
   });
-});
+};
+
+$(document).ready(initPage);
 
 function checkPromo() {
+  debugger
   if (
     (pieceType == "Pawn" && column == 0) ||
     (pieceType == "Pawn" && column == 7)
@@ -45,36 +43,19 @@ function checkPromo() {
 
 function promoModal() {
   $("#promotion").modal("show");
-  $("#rookButton").on("click", function() {
-    promoChoice = "Rook";
-    givePromo();
-  });
-  $("#bishopButton").on("click", function() {
-    promoChoice = "Bishop";
-    givePromo();
-  });
-  $("#knightButton").on("click", function() {
-    promoChoice = "Knight";
-    givePromo();
-  });
-  $("#queenButton").on("click", function() {
-    promoChoice = "Queen";
-    givePromo();
+  $(".choices button").on("click", function() {
+    givePromo($(this).data("type"));
   });
 }
 
-function givePromo() {
+function givePromo(promoChoice) {
   $.ajax({
     url: "/pieces/" + pieceId,
     type: "PUT",
     data: { piece: { type: promoChoice } },
     success: function() {
-      debugger;
-      // This where we want to move/replace the html element
+      initPage();
     },
-    error: function() {
-      debugger;
-      // This is where we want to error 400
-    }
+    error: function() {}
   });
 }
