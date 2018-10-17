@@ -156,7 +156,7 @@ RSpec.describe Game, type: :model do
       pawn4 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 4, coordinate_y: 1).first
       pawn5 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 5, coordinate_y: 1).first
       
-      queen = FactoryBot.create(:queen, coordinate_x: 6, coordinate_y: 3, piece_color: 'white',  user_id: user_white.id, game_id: game.id) 
+      bishopW = FactoryBot.create(:bishop, coordinate_x: 7, coordinate_y: 4, piece_color: 'white', user_id: user_white.id, game_id: game.id) 
 
       pawn4.move_to!(4, 2)      
       king.move_to!(4, 1)
@@ -167,11 +167,32 @@ RSpec.describe Game, type: :model do
       expect(game.checkmate?(game.user_black)).to eq true
     end
 
-    #    it "should verify if king is in check and another piece can block checkmate and return false" do
+    it "should verify if king is in check and another piece can block checkmate and return true" do
+      user_black = FactoryBot.create(:user)
+      user_white = FactoryBot.create(:user)
+      game = FactoryBot.create(:game, user_white_id: user_white.id, user_black_id: user_black.id)
+
+      king = game.pieces.where(user_id: user_black.id, type: 'King').first
+      queen = game.pieces.where(user_id: user_black.id, type: 'Queen').first
+      pawn4 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 4, coordinate_y: 1).first
+      pawn5 = game.pieces.where(user_id: user_black.id, type: 'Pawn', coordinate_x: 5, coordinate_y: 1).first
+      
+      bishopW = FactoryBot.create(:bishop, coordinate_x: 7, coordinate_y: 4, piece_color: 'white', user_id: user_white.id, game_id: game.id) 
+
+      pawn4.move_to!(4, 2)      
+      king.move_to!(4, 1)
+      queen.move_to!(4, 0)
+      pawnBlock = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 0, piece_color: 'black',  user_id: user_black.id, game_id: game.id) 
+      pawnblock2 = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 2, piece_color: 'black',  user_id: user_black.id, game_id: game.id) 
+
+      rookBlock = FactoryBot.create(:pawn, coordinate_x: 3, coordinate_y: 3, piece_color: 'black',  user_id: user_black.id, game_id: game.id) 
 
     
-
-    # end
+      
+   
+    
+      expect(game.checkmate?(game.user_black)).to eq true
+    end
 
 
   end

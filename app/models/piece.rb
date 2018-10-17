@@ -178,7 +178,7 @@ class Piece < ApplicationRecord
       check_diaganol(x_target, y_target) 
 
     else    
-      puts "Error: Invalid Move #{self.piece_color} #{self.type} at #{self.coordinate_x}, #{self.coordinate_y} "
+      # puts "Error: Invalid Move #{self.piece_color} #{self.type} at #{self.coordinate_x}, #{self.coordinate_y} "
       # puts "#{self.inspect}"
       return false
       # raise "Error Invalid move"

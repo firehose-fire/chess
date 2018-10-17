@@ -63,12 +63,10 @@ class Game < ApplicationRecord
       @king_y = @king.coordinate_y
         user_white.pieces.where(game: self.id).each do |piece| 
         if piece.type != "King" 
-            # puts "---#{is_valid_move_valid_capture?(piece, @king)}"
-            # puts "+++ Valid move? to #{@king_x}, #{@king_y}  #{piece.valid_move?(@king_x,@king_y)}"
-            if is_valid_move_valid_capture?(piece, @king) == true
-              @check_piece = @piece
-              return true
-            end 
+          if is_valid_move_valid_capture?(piece, @king) == true
+            @check_piece = @piece
+            return true
+          end 
           end 
         end
       return false
@@ -109,7 +107,6 @@ class Game < ApplicationRecord
     user.pieces.where(game: self.id).each do |piece|
 
       if is_valid_move_valid_capture?(piece, check_piece) == true  
-         # puts "++++Piece from passed valid move valid capture is #{@check_piece.type}"
         return true 
       end
       return false 
@@ -117,48 +114,72 @@ class Game < ApplicationRecord
      
   end
 
+
+  def can_king_move?(user)
+    king_moves = [  
+      [@king_x+1, @king_y+1],
+      [@king_x+1, @king_y],
+      [@king_x+1, @king_y-1],
+      [@king_x, @king_y+1],
+      [@king_x, @king_y-1],
+      [@king_x-1, @king_y+1],
+      [@king_x-1, @king_y],
+      [@king_x-1, @king_y-1]
+    ]   
+
+        #check surrounding spaces to see if king can move to avoid checkmate      
+    king_moves.each do |move| 
+      #is move in bounds? is space empty? check piece cannot move to that space and capture king
+      return false if king.boundaries(move[0], move[1]) == true && pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil && @check_piece.valid_move?(move[0],move[1]) == false 
+    end
+  end
+
+  def can_block?(user, check_piece)
+
+    user.pieces.where(game: self.id).each do | piece |
+      puts "Checking #{piece.type} at #{piece.coordinate_x}, #{piece.coordinate_y}"
+      #find pieces that can move between the check piece and the king
+      if check_piece.is_diagonal_move?(@king.coordinate_x, @king.coordinate_y) == true 
+        if check_piece.coordinate_x > @king_x
+          first = @king_x+1
+          last = check_piece.coordinate_x
+          y_axis = @king_y+1
+        elsif check_piece.coordinate_x < @king_x
+          first = check_piece.coordinate_x+1
+          last = @king_x
+          y_axis = check_piece.coordinate_y+1
+        end
+      
+        (first...last).each do | x_axis |
+          puts "x is #{x_axis}, y is #{y_axis}"
+          return true if piece.valid_move?(x_axis,y_axis) == true
+          y_axis+=1
+           
+        end
+      
+        
+      end
+      return false
+    end
+  
+  end
+
   
   def checkmate?(user)
     @user = user
     if is_check?(@user) == true
 
-      if capture_check?(@user, @check_piece) == true
-        return false
-     end  
-      # elsif capture_check?(@user, @check_piece) == false
-        king_moves = [  
-          [@king_x+1, @king_y+1],
-          [@king_x+1, @king_y],
-          [@king_x+1, @king_y-1],
-          [@king_x, @king_y+1],
-          [@king_x, @king_y-1],
-          [@king_x-1, @king_y+1],
-          [@king_x-1, @king_y],
-          [@king_x-1, @king_y-1]
-        ]   
+      # return false if capture_check?(@user, @check_piece) == true || can_king_move?(@user) == false 
+      return false if  can_block?(@user, @check_piece) == true
+    
+      # can_block?(@user, @check_piece)
 
-        #check surrounding spaces to see if king can move to avoid checkmate      
-        king_moves.each do |move|
-           #is move in bounds?
-          if king.boundaries(move[0], move[1]) == true
-            #is space empty?
-            if pieces.where(coordinate_x: move[0], coordinate_y: move[1]).first == nil
-                #check piece cannot move to that space and capture king
-              if @check_piece.valid_move?(move[0],move[1]) == false 
-                   return false 
-              end
-            end
-          end        
-        end
-        
-      # end
-     
       puts "checkmate!"
       return true
     
     else  
       return false
-   end
+    end
 
   end
   
