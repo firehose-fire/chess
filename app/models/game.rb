@@ -4,7 +4,6 @@ class Game < ApplicationRecord
   belongs_to :user_black, class_name: 'User', optional: true
   has_many :pieces
 
-  after_create :populate_the_game
   
   scope :available, -> { where(user_white_id: nil) }
 
@@ -15,6 +14,7 @@ class Game < ApplicationRecord
   end
   
   def populate_the_game 
+
 
     # Pawn creation for white and black player
     (0..7).each do |b|
@@ -58,7 +58,7 @@ class Game < ApplicationRecord
   def is_check?(user)
     @check_piece = nil
     if user == user_black
-      @king = pieces.where(type: "King", user_id: user_black).first 
+      @king = pieces.where(type: "King", user_id: user_black).first
       @king_x = @king.coordinate_x
       @king_y = @king.coordinate_y
       user_white.pieces.where(game: self.id).each do |piece|      

@@ -8,7 +8,11 @@ class PiecesController < ApplicationController
   def update
     @selected_piece = Piece.find(params[:id])
     @game = @selected_piece.game
-    @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
+    if(@game.is_check?(current_user) == true)
+      raise ActiveRecord::Rollback, "King in check"
+    else
+      @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
+    end
   end
 
 

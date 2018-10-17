@@ -11,6 +11,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
+    redirect_to root_path
   end
 
   def show
@@ -21,8 +22,9 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if current_user 
-      @game.update(user_white_id: current_user.id)     
-    redirect_to game_path
+      @game.update(user_white_id: current_user.id)
+      @game.populate_the_game
+      redirect_to game_path
     end
   end
 

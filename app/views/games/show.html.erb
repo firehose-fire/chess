@@ -1,4 +1,8 @@
-
+<% if @game.is_check?(current_user) %>
+  <div>In check</div>
+  <% else %>
+  <div>Not in check</div>
+  <% end %>
 
 <%= render partial: "games/board" %>
 
