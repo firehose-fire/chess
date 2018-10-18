@@ -22,9 +22,13 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(new_x, new_y)
+    return false if piece_color == 'white' && game.turn == true
+    return false if piece_color == 'black' && game.turn == false
     return false if valid_move?(new_x, new_y) == false
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
+    game.toggle_turn
+
   end
 
   def is_occupied?(x, y)
@@ -173,3 +177,7 @@ class Piece < ApplicationRecord
   end  
 
 end
+
+
+
+
