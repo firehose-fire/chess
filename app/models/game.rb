@@ -105,7 +105,7 @@ class Game < ApplicationRecord
     @check_piece = check_piece
     #can any of my pieces capture the piece that has me in check?
     user.pieces.where(game: self.id).each do |piece|
-     if is_valid_move_valid_capture?(piece, check_piece) == true  
+     if is_valid_move_valid_capture?(piece, check_piece) == true 
         return true 
       end
       
@@ -137,9 +137,7 @@ class Game < ApplicationRecord
     #find pieces that can move to the path between the check piece and the king 
     user.pieces.where(game: self.id).each do | piece |
       if piece.type != "King" 
-        # puts "Checking #{piece.type} at #{piece.coordinate_x}, #{piece.coordinate_y}"
-        # check diagonal spaces between check piece and king
-        
+        # check diagonal spaces between check piece and king        
         if check_piece.is_diagonal_move?(@king.coordinate_x, @king.coordinate_y) == true 
           #find which piece is lesser and greater to seth the range check
           if check_piece.coordinate_x > @king_x
@@ -157,8 +155,9 @@ class Game < ApplicationRecord
             y_axis+=1        
           end
         end
-        
+
         if check_piece.is_horizontal_move?(@king.coordinate_x, @king.coordinate_y) == true
+          
           if check_piece.coordinate_x > @king_x
             first = @king_x+1
             last = check_piece.coordinate_x
@@ -171,8 +170,8 @@ class Game < ApplicationRecord
             return true if piece.valid_move?(moving_axis,@king_y) == true
                    
           end
-        
-        elsif check_piece.is_vertical_move?(@king.coordinate_x, @king.coordinate_y) == true
+        end
+        if check_piece.is_vertical_move?(@king.coordinate_x, @king.coordinate_y) == true
           if check_piece.coordinate_y > @king_y
             first = @king_y+1
             last = check_piece.coordinate_y
@@ -182,7 +181,7 @@ class Game < ApplicationRecord
           end
 
           (first...last).each do | moving_axis |
-            return true if piece.valid_move?(@king_y,moving_axis) == true
+            return true if piece.valid_move?(@king_x,moving_axis) == true
           end      
 
         end
@@ -199,18 +198,8 @@ class Game < ApplicationRecord
   def checkmate?(user)
     @user = user
     if is_check?(@user) == true
-      puts "#{can_block?(@user, @check_piece) == true}"
-      return false if can_block?(@user, @check_piece) == true
-      puts "#{capture_check?(@user, @check_piece) == true}"
-      return false if capture_check?(@user, @check_piece) == true 
-      puts "#{can_king_move?(@user) == false}"
-
-      return false if can_king_move?(@user) == false 
-      
-    
-      # can_block?(@user, @check_piece)
-
-      puts "checkmate!"
+      return false if can_block?(@user, @check_piece) == true || capture_check?(@user, @check_piece) == true  ||  can_king_move?(@user) == false 
+       puts "checkmate!"
       return true
     
     else  

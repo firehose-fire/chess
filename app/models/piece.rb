@@ -157,6 +157,7 @@ class Piece < ApplicationRecord
     y_position_change = (y_target - coordinate_y).abs
     # is the path valid
    if boundaries(x_target,y_target) == false
+    puts "#{self.inspect} moving to #{x_target}, #{y_target}"
     raise 'Outside of bounds of game'
    end
 
