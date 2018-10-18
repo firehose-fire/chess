@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Bishop, type: :model do
-   before(:all) do 
-    game = FactoryBot.build(:game)
-    user = FactoryBot.build(:user)
-    @bishop = FactoryBot.build(:bishop, coordinate_x: 4, coordinate_y: 4, game_id: game.id, user_id: user.id)      
+   before(:each) do 
+    @game = FactoryBot.build(:game)
+    @user = FactoryBot.build(:user)
+    @bishop = FactoryBot.build(:bishop, coordinate_x: 2, coordinate_y: 0, game: @game, user: @user)      
   end
    describe "valid_move?" do
     

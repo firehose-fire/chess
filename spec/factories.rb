@@ -13,17 +13,21 @@ FactoryBot.define do
   factory :rook do
     
   end
+
   factory :bishop do
     
   end
+
   factory :knight do
     
   end
   factory :pawn do
-  
+    coordinate_x 0
+    coordinate_y 0
+    user_id 0
+    game
   end
 
-  # create(:pawn, :white)
   factory :user do
     sequence :email do |n|
       "dummi#{n}Email#{n}@gmail.com"
@@ -43,9 +47,8 @@ FactoryBot.define do
     sequence :id do |i|
       "#{i}#{i}"
     end
-
-
   end
+
 
   
 
