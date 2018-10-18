@@ -1,13 +1,9 @@
 $( function(){
   var selected_piece
 
-function castleQueen(){
-  alert('');
-}
-
 $('.pieces').click(function(){
   selected_piece = $(this).attr('id'); 
-  alert(selected_piece);
+  
 })
 
 
