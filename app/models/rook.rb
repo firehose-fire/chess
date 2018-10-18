@@ -31,16 +31,16 @@ class Rook < Piece
     if can_castle?
       if self.piece_color == "white"
         # move rook queenside
-        self.update_attributes(coordinate_x: 2, coordinate_y: 7)
+        self.update_attributes(coordinate_x: 3, coordinate_y: 7)
         # move king
         white_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 7, has_moved: false).first
-        white_king.update_attributes(coordinate_x: 1, coordinate_y: 7)
+        white_king.update_attributes(coordinate_x: 2, coordinate_y: 7)
       else
         # move rook queenside
-        self.update_attributes(coordinate_x: 2, coordinate_y: 0)
+        self.update_attributes(coordinate_x: 3, coordinate_y: 0)
         # move king
         black_king = Piece.where(type: "King", game_id: game_id, coordinate_x: 4, coordinate_y: 0, has_moved: false).first
-        black_king.update_attributes(coordinate_x: 1, coordinate_y: 0)
+        black_king.update_attributes(coordinate_x: 2, coordinate_y: 0)
       end
     end
   end
