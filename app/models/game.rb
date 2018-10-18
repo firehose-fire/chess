@@ -13,6 +13,14 @@ class Game < ApplicationRecord
     pieces.where(coordinate_x: x, coordinate_y: y).first
   end
   
+  def toggle_turn
+    next_turn = !turn
+    if update_attributes(turn: next_turn)
+      return next_turn
+    end
+      nil
+  end
+  
   def populate_the_game 
 
     # Pawn creation for white and black player
