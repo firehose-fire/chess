@@ -6,7 +6,7 @@ table {
   margin: auto;
   border: collapse;
   background: white;
-  border: 5px solid #333;
+  border: 3px solid #333;
   border-collapse: collapse;
 }
 
@@ -18,3 +18,12 @@ td {
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
   background: black;
 }
+
+.highlighted {
+  border: 3px solid orangered;
+}
+
+.pieces {
+  background: white;
+}
+
