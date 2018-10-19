@@ -1,0 +1,6 @@
+<%= simple_form_for @game do |f| %>
+  <%= f.input :name %>
+  <%= f.input :user_black_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+  <br />
+  <%= f.submit 'Create' %>
+<% end %>
