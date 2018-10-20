@@ -1,5 +1,4 @@
 class Piece < ApplicationRecord
-  attr_accessor :has_moved
 
   belongs_to :game, optional: true
   belongs_to :user, optional: true
@@ -22,11 +21,13 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(new_x, new_y)
+    puts "before move occurs has_moved value is: #{has_moved}"
     return false if piece_color == 'white' && game.turn == true
     return false if piece_color == 'black' && game.turn == false
     return false if valid_move?(new_x, new_y) == false
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
+    puts "after move occurs has_moved value is: #{has_moved}"
     game.toggle_turn
 
   end
