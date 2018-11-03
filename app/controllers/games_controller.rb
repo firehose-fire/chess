@@ -10,6 +10,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    @game = Game.create(game_params)
   end
 
   def show
@@ -31,6 +32,12 @@ class GamesController < ApplicationController
       @game.destroy
     redirect_to root_path
     end
+  end
+
+  private
+
+  def game_params
+    params.require(:game).permit(:name, :user_black_id)
   end
   
 end
