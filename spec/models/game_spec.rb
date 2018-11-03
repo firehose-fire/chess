@@ -83,6 +83,7 @@ RSpec.describe Game, type: :model do
     end
   end
 
+
   describe "game is in state of checkmate" do
     
 
@@ -227,6 +228,7 @@ RSpec.describe Game, type: :model do
     end
 
   end
+
 
 
 end

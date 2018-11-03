@@ -1,5 +1,4 @@
 class Piece < ApplicationRecord
-  attr_accessor :has_moved
 
   belongs_to :game, optional: true
   belongs_to :user, optional: true
@@ -28,6 +27,7 @@ class Piece < ApplicationRecord
     return false if valid_move?(new_x, new_y) == false
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
+    puts "after move occurs has_moved value is: #{has_moved}"
     game.toggle_turn
 
   end
@@ -182,9 +182,7 @@ class Piece < ApplicationRecord
       check_diaganol(x_target, y_target) 
 
     else    
-      # puts "Error: Invalid Move #{self.piece_color} #{self.type} at #{self.coordinate_x}, #{self.coordinate_y} "
-      # puts "#{self.inspect}"
-      return false
+       return false
       # raise "Error Invalid move"
     end
 
