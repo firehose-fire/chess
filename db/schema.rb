@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(version: 20181008000212) do
     t.integer  "coordinate_y"
     t.string   "piece_color"
     t.boolean  "captured"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "type"
     t.integer  "user_id"
     t.integer  "game_id"
-    t.boolean  "has_moved"
+    t.boolean  "has_moved",    default: false
     t.boolean  "en_passant"
   end
 

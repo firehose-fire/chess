@@ -7,10 +7,21 @@ class PiecesController < ApplicationController
 
   def update
     @selected_piece = Piece.find(params[:id])
-    @game = @selected_piece.game
+    @game = @selected_piece.game 
     @selected_piece.move_to!(params[:piece][:coordinate_x].to_i, params[:piece][:coordinate_y].to_i)
   end
 
+  def castle_queen
+    @selected_piece = Piece.find(params[:rookid])
+    @selected_piece.castle_queenside!
+    render :json => {}
+  end
+
+  def castle_king
+    @selected_piece = Piece.find(params[:rookid])
+    @selected_piece.castle_kingside!
+    render :json => {}
+  end
 
   private
 

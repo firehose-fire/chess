@@ -1,4 +1,6 @@
 class Piece < ApplicationRecord
+  attr_accessor :has_moved
+
   belongs_to :game, optional: true
   belongs_to :user, optional: true
   
@@ -27,6 +29,7 @@ class Piece < ApplicationRecord
     captured!(new_x, new_y)
     update_attributes(coordinate_x: new_x, coordinate_y: new_y, has_moved: true)
     game.toggle_turn
+
   end
 
   # check move is within board boundaries
@@ -163,8 +166,6 @@ class Piece < ApplicationRecord
     raise 'Outside of bounds of game'
    end
 
-      
-    
     # is the path horizontal
     if  y_position_change == 0 && x_position_change > 0
 
@@ -187,8 +188,7 @@ class Piece < ApplicationRecord
       # raise "Error Invalid move"
     end
 
-  end
-
+  end  
 
 end
 

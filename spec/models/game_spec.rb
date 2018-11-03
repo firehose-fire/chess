@@ -37,7 +37,6 @@ RSpec.describe Game, type: :model do
 
   describe "is check for the king" do
 
-
     it "should see if the color black king is in a check position and return true" do
       user_black = FactoryBot.create(:user)
       user_white = FactoryBot.create(:user)
