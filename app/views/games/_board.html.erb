@@ -15,3 +15,17 @@
     </tr>
   <% end %> 
 </table>
+
+
+<div class='parent'>
+  <% if @game.turn == true %>
+    <div class="black">
+      Black
+    </div>
+  <% elsif @game.turn == false %>
+    <div class="white">
+      White
+    </div>
+  <% end %>
+</div>
+
